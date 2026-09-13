@@ -1,0 +1,92 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="using:System"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <sys:Double x:Key="BcNotificationStripeWidth">4</sys:Double>
+  <Thickness x:Key="BcNotificationContentPadding">4,0,0,0</Thickness>
+  <ControlTheme x:Key="{x:Type NotificationCard}"
+                TargetType="NotificationCard">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="UseLayoutRounding" Value="True" />
+    <Setter Property="Width" Value="350" />
+    <Setter Property="Margin" Value="0,0,0,4" />
+    <Setter Property="RenderTransformOrigin" Value="50%,75%" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <LayoutTransformControl Name="PART_LayoutTransformControl"
+                                UseRenderTransform="True">
+          <bc:BevelBorder Name="PART_Bevel"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <DockPanel>
+              <Border Name="PART_Stripe"
+                      DockPanel.Dock="Left"
+                      Width="{StaticResource BcNotificationStripeWidth}"
+                      Background="{DynamicResource BcSelectedBgBrush}" />
+              <ContentPresenter Name="PART_ContentPresenter"
+                                MinHeight="48"
+                                Padding="{StaticResource BcNotificationContentPadding}"
+                                Content="{TemplateBinding Content}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+            </DockPanel>
+          </bc:BevelBorder>
+        </LayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^[IsClosing=true] /template/ LayoutTransformControl#PART_LayoutTransformControl">
+      <Setter Property="RenderTransformOrigin" Value="50%,0%" />
+      <Style.Animations>
+        <Animation Easing="QuadraticEaseOut"
+                   FillMode="Forward"
+                   Duration="0:0:0.75">
+          <KeyFrame Cue="0%">
+            <Setter Property="TranslateTransform.X" Value="0" />
+            <Setter Property="ScaleTransform.ScaleY" Value="1" />
+          </KeyFrame>
+          <KeyFrame Cue="70%">
+            <Setter Property="TranslateTransform.X" Value="800" />
+            <Setter Property="ScaleTransform.ScaleY" Value="1" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="ScaleTransform.ScaleY" Value="0" />
+            <Setter Property="TranslateTransform.X" Value="800" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="^[IsClosing=true]">
+      <Style.Animations>
+        <Animation Easing="QuadraticEaseOut"
+                   FillMode="Forward"
+                   Duration="0:0:1.25">
+          <KeyFrame Cue="100%">
+            <Setter Property="IsClosed" Value="True" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="^:information /template/ Border#PART_Stripe">
+      <Setter Property="Background" Value="{DynamicResource BcSelectedBgBrush}" />
+    </Style>
+    <Style Selector="^:success /template/ Border#PART_Stripe">
+      <Setter Property="Background" Value="{DynamicResource BcSuccessBrush}" />
+    </Style>
+    <Style Selector="^:warning /template/ Border#PART_Stripe">
+      <Setter Property="Background" Value="{DynamicResource BcWarningBrush}" />
+    </Style>
+    <Style Selector="^:error /template/ Border#PART_Stripe">
+      <Setter Property="Background" Value="{DynamicResource BcErrorBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,216 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <StackPanel Margin="20" Width="250" Spacing="12">
+      <ToggleSwitch Content="Automatic updates" OffContent="Off" OnContent="On" />
+      <ToggleSwitch Content="Previewer" IsChecked="True" />
+      <ToggleSwitch Content="Disabled" IsEnabled="False" />
+    </StackPanel>
+  </Design.PreviewWith>
+
+  <x:Double x:Key="BcToggleSwitchTrackWidth">76</x:Double>
+  <x:Double x:Key="BcToggleSwitchTrackHeight">25</x:Double>
+  <x:Double x:Key="BcToggleSwitchKnobWidth">38</x:Double>
+  <Thickness x:Key="BcToggleSwitchTopHeaderMargin">0,0,0,6</Thickness>
+  <GridLength x:Key="BcToggleSwitchPreContentMargin">6</GridLength>
+  <GridLength x:Key="BcToggleSwitchPostContentMargin">6</GridLength>
+
+  <ControlTheme x:Key="{x:Type ToggleSwitch}"
+                TargetType="ToggleSwitch">
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="KnobTransitions">
+      <Transitions>
+        <DoubleTransition
+            Easing="CubicEaseOut"
+            Property="Canvas.Left"
+            Duration="0:0:0.2" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Background="{TemplateBinding Background}"
+              RowDefinitions="Auto,*">
+
+          <ContentPresenter x:Name="PART_ContentPresenter"
+                            Grid.Row="0"
+                            Margin="{DynamicResource BcToggleSwitchTopHeaderMargin}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Top" />
+
+          <Grid Grid.Row="1"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+
+            <Grid.RowDefinitions>
+              <RowDefinition Height="{DynamicResource BcToggleSwitchPreContentMargin}" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="{DynamicResource BcToggleSwitchPostContentMargin}" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="12" MaxWidth="12" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="SwitchAreaGrid"
+                  Grid.RowSpan="3"
+                  Grid.ColumnSpan="3"
+                  Background="Transparent"
+                  TemplatedControl.IsTemplateFocusTarget="True"
+                  Margin="0,5" />
+
+            <ContentPresenter x:Name="PART_OffContentPresenter"
+                              Grid.RowSpan="3"
+                              Grid.Column="2"
+                              Content="{TemplateBinding OffContent}"
+                              ContentTemplate="{TemplateBinding OffContentTemplate}"
+                              TextElement.Foreground="{TemplateBinding Foreground}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+            <ContentPresenter x:Name="PART_OnContentPresenter"
+                              Grid.RowSpan="3"
+                              Grid.Column="2"
+                              Content="{TemplateBinding OnContent}"
+                              ContentTemplate="{TemplateBinding OnContentTemplate}"
+                              TextElement.Foreground="{TemplateBinding Foreground}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+            <bc:BevelBorder x:Name="OuterBorder"
+                            Grid.Row="1"
+                            Width="{DynamicResource BcToggleSwitchTrackWidth}"
+                            Height="{DynamicResource BcToggleSwitchTrackHeight}"
+                            Background="{DynamicResource BcDarkerBrush}"
+                            BorderBrush="{DynamicResource BcBorderBrush}"
+                            BorderThickness="1"
+                            Bevel="Raised"
+                            LightBrush="Transparent"
+                            DarkBrush="Transparent">
+              <Grid ColumnDefinitions="*,*">
+                <Rectangle x:Name="SwitchOnMark"
+                           Grid.Column="0"
+                           Width="2"
+                           Height="9"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Fill="{DynamicResource BcSelectedFgBrush}"
+                           IsVisible="False" />
+                <Ellipse x:Name="SwitchOffMark"
+                         Grid.Column="1"
+                         Width="9"
+                         Height="9"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         StrokeThickness="2"
+                         Stroke="{DynamicResource BcFgBrush}" />
+              </Grid>
+            </bc:BevelBorder>
+
+            <Canvas x:Name="PART_SwitchKnob"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    Width="{DynamicResource BcToggleSwitchKnobWidth}"
+                    Height="{DynamicResource BcToggleSwitchTrackHeight}">
+              <Grid x:Name="PART_MovingKnobs"
+                    Width="{DynamicResource BcToggleSwitchKnobWidth}"
+                    Height="{DynamicResource BcToggleSwitchTrackHeight}">
+                <bc:BevelBorder x:Name="SwitchKnob"
+                                Background="{DynamicResource BcBgBrush}"
+                                BorderBrush="{DynamicResource BcDarkerBorderBrush}"
+                                BorderThickness="1"
+                                Bevel="Raised"
+                                LightBrush="{DynamicResource BcBevelLightBrush}"
+                                DarkBrush="{DynamicResource BcBevelDarkBrush}" />
+              </Grid>
+            </Canvas>
+
+            <Rectangle x:Name="PART_FocusRect"
+                       Grid.Row="1"
+                       Width="72"
+                       Height="21"
+                       Margin="2"
+                       Stroke="{DynamicResource BcOutlineBrush}"
+                       StrokeThickness="1"
+                       StrokeDashArray="1,1"
+                       IsVisible="False"
+                       IsHitTestVisible="False" />
+          </Grid>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter:empty">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#SwitchKnob">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+
+    <Style Selector="^:pressed /template/ bc|BevelBorder#SwitchKnob">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+
+    <Style Selector="^:checked /template/ bc|BevelBorder#OuterBorder">
+      <Setter Property="Background" Value="{DynamicResource BcMenuItemGradientBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMenuItemBorderBrush}" />
+      <Setter Property="LightBrush" Value="{DynamicResource BcMenuItemLightBrush}" />
+      <Setter Property="DarkBrush" Value="{DynamicResource BcMenuItemDarkBrush}" />
+    </Style>
+    <Style Selector="^:checked /template/ Rectangle#SwitchOnMark">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:checked /template/ Ellipse#SwitchOffMark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked /template/ ContentPresenter#PART_OffContentPresenter">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked /template/ ContentPresenter#PART_OnContentPresenter">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:unchecked /template/ ContentPresenter#PART_OffContentPresenter">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:unchecked /template/ ContentPresenter#PART_OnContentPresenter">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#OuterBorder">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+      <Setter Property="Bevel" Value="None" />
+    </Style>
+    <Style Selector="^:disabled /template/ Rectangle#SwitchOnMark">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Ellipse#SwitchOffMark">
+      <Setter Property="Stroke" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#SwitchKnob">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,178 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    xmlns:converters="using:Avalonia.Controls.Converters"
+                    x:ClassModifier="internal">
+
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <SplitButton Content="Split" />
+    </Border>
+  </Design.PreviewWith>
+
+  <x:Double x:Key="BcSplitButtonPrimaryMinWidth">24</x:Double>
+  <x:Double x:Key="BcSplitButtonSecondaryWidth">16</x:Double>
+  <x:Double x:Key="BcSplitButtonMinHeight">24</x:Double>
+
+  <converters:MarginMultiplierConverter x:Key="BcSplitButtonPrimaryBorderMultiplier" Left="True" Top="True" Bottom="True" Indent="1" />
+  <converters:MarginMultiplierConverter x:Key="BcSplitButtonSecondaryBorderMultiplier" Right="True" Top="True" Bottom="True" Indent="1" />
+  <converters:MarginMultiplierConverter x:Key="BcSplitButtonSeparatorBorderMultiplier" Top="True" Bottom="True" Indent="1" />
+
+  <ControlTheme x:Key="BcSplitButtonComponentTheme" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <ContentPresenter x:Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            RecognizesAccessKey="True"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+
+    <Style Selector="^[Tag=flyout-open] /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^[Tag=checked] /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^[Tag=checked-flyout-open] /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^[Tag=checked]:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type SplitButton}" TargetType="SplitButton">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="MinHeight" Value="{DynamicResource BcSplitButtonMinHeight}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="Padding" Value="{DynamicResource BcButtonPadding}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <Button x:Name="PART_PrimaryButton"
+                    Grid.Column="0"
+                    Theme="{StaticResource BcSplitButtonComponentTheme}"
+                    MinWidth="{DynamicResource BcSplitButtonPrimaryMinWidth}"
+                    Foreground="{TemplateBinding Foreground}"
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="{TemplateBinding BorderThickness, Converter={StaticResource BcSplitButtonPrimaryBorderMultiplier}}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    Command="{TemplateBinding Command}"
+                    CommandParameter="{TemplateBinding CommandParameter}"
+                    FontFamily="{TemplateBinding FontFamily}"
+                    FontSize="{TemplateBinding FontSize}"
+                    FontWeight="{TemplateBinding FontWeight}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Padding="{TemplateBinding Padding}"
+                    Focusable="False"
+                    KeyboardNavigation.IsTabStop="False" />
+
+            <Border x:Name="SeparatorBorder"
+                    Grid.Column="1"
+                    Background="{DynamicResource BcMediumBorderBrush}"
+                    Width="1"
+                    BorderThickness="{TemplateBinding BorderThickness, Converter={StaticResource BcSplitButtonSeparatorBorderMultiplier}}"
+                    BorderBrush="{TemplateBinding BorderBrush}" />
+
+            <Button x:Name="PART_SecondaryButton"
+                    Grid.Column="2"
+                    Theme="{StaticResource BcSplitButtonComponentTheme}"
+                    Width="{DynamicResource BcSplitButtonSecondaryWidth}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    Foreground="{TemplateBinding Foreground}"
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="{TemplateBinding BorderThickness, Converter={StaticResource BcSplitButtonSecondaryBorderMultiplier}}"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Focusable="False"
+                    KeyboardNavigation.IsTabStop="False">
+              <Path Name="DropDownGlyph"
+                    Width="7"
+                    Height="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="{StaticResource BcArrowDownGeometry}"
+                    Fill="{DynamicResource BcButtonIconBrush}" />
+            </Button>
+          </Grid>
+          <Rectangle Name="PART_FocusRect"
+                     Margin="2"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,1"
+                     IsVisible="False"
+                     IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:flyout-open /template/ Button">
+      <Setter Property="Tag" Value="flyout-open" />
+    </Style>
+    <Style Selector="^:checked /template/ Button">
+      <Setter Property="Tag" Value="checked" />
+    </Style>
+    <Style Selector="^:checked:flyout-open /template/ Button">
+      <Setter Property="Tag" Value="checked-flyout-open" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^ /template/ Button#PART_SecondaryButton:pointerover Path#DropDownGlyph">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Path#DropDownGlyph">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

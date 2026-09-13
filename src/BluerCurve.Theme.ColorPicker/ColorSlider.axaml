@@ -1,0 +1,218 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives;assembly=BluerCurve.Theme"
+                    x:ClassModifier="internal">
+
+  <x:Double x:Key="ColorSliderSize">31</x:Double>
+  <x:Double x:Key="ColorSliderTrackSize">20</x:Double>
+  <x:Double x:Key="ColorSliderThumbThickness">15</x:Double>
+  <CornerRadius x:Key="ColorSliderCornerRadius">0</CornerRadius>
+  <CornerRadius x:Key="ColorSliderTrackCornerRadius">0</CornerRadius>
+  <StreamGeometry x:Key="ColorSliderGripChevronDownGeometry">M0,0 L1,0 L3.5,2.7 L6,0 L7,0 L3.5,4 Z</StreamGeometry>
+
+  <ControlTheme x:Key="ColorSliderThumbTheme"
+                TargetType="Thumb">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <bc:BevelBorder Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <Canvas Width="10" Height="8"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+              <Path Canvas.Left="1" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="0" Canvas.Top="0" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBorderBrush}" />
+              <Path Canvas.Left="6" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="5" Canvas.Top="0" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBorderBrush}" />
+            </Canvas>
+          </bc:BevelBorder>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="ColorSliderVerticalThumbTheme"
+                TargetType="Thumb"
+                BasedOn="{StaticResource ColorSliderThumbTheme}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <bc:BevelBorder Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <Canvas Width="8" Height="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+              <Path Canvas.Left="1" Canvas.Top="1" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="0" Canvas.Top="0" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBorderBrush}" />
+              <Path Canvas.Left="1" Canvas.Top="6" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="0" Canvas.Top="5" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBorderBrush}" />
+            </Canvas>
+          </bc:BevelBorder>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ColorSlider}"
+                TargetType="ColorSlider">
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="BorderThickness" Value="0" />
+
+    <Style Selector="^:horizontal">
+      <Setter Property="Height" Value="{DynamicResource ColorSliderSize}" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="{x:Type ColorSlider}">
+          <Grid Margin="{TemplateBinding Padding}">
+            <Border HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Height="{Binding ElementName=PART_Track, Path=Bounds.Height}">
+              <Panel>
+                <Border Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+                <Border Background="{TemplateBinding Background}" />
+                <Border BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1" />
+              </Panel>
+            </Border>
+            <Track Name="PART_Track"
+                   Height="{DynamicResource ColorSliderTrackSize}"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value, Mode=TwoWay}"
+                   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                   Orientation="Horizontal">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton"
+                              Background="Transparent"
+                              Focusable="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Name="FocusTarget"
+                              Background="Transparent"
+                              Margin="0,-10" />
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton"
+                              Background="Transparent"
+                              Focusable="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Name="FocusTarget"
+                              Background="Transparent"
+                              Margin="0,-10" />
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.IncreaseButton>
+              <Thumb Name="ColorSliderThumb"
+                     Theme="{StaticResource ColorSliderThumbTheme}"
+                     Margin="0"
+                     Padding="0"
+                     DataContext="{TemplateBinding Value}"
+                     Height="{TemplateBinding Height}"
+                     Width="{DynamicResource ColorSliderThumbThickness}" />
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:vertical">
+      <Setter Property="Width" Value="{DynamicResource ColorSliderSize}" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="{x:Type ColorSlider}">
+          <Grid Margin="{TemplateBinding Padding}">
+            <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Width="{Binding ElementName=PART_Track, Path=Bounds.Width}">
+              <Panel>
+                <Border Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+                <Border Background="{TemplateBinding Background}" />
+                <Border BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1" />
+              </Panel>
+            </Border>
+            <Track Name="PART_Track"
+                   Width="{DynamicResource ColorSliderTrackSize}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Stretch"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value, Mode=TwoWay}"
+                   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                   Orientation="Vertical">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton"
+                              Background="Transparent"
+                              Focusable="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Name="FocusTarget"
+                              Background="Transparent"
+                              Margin="-10,0" />
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton"
+                              Background="Transparent"
+                              Focusable="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Name="FocusTarget"
+                              Background="Transparent"
+                              Margin="-10,0" />
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.IncreaseButton>
+              <Thumb Name="ColorSliderThumb"
+                     Theme="{StaticResource ColorSliderVerticalThumbTheme}"
+                     Margin="0"
+                     Padding="0"
+                     DataContext="{TemplateBinding Value}"
+                     Height="{DynamicResource ColorSliderThumbThickness}"
+                     Width="{TemplateBinding Width}" />
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:pointerover /template/ Thumb#ColorSliderThumb">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^ /template/ Thumb#ColorSliderThumb:pressed">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Thumb#ColorSliderThumb">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

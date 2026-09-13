@@ -1,0 +1,89 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pc="using:Avalonia.Controls.Primitives.Converters"
+                    x:ClassModifier="internal">
+
+  <pc:AccentColorConverter x:Key="AccentColorConverter" />
+  <x:Double x:Key="ColorPreviewerAccentSectionWidth">80</x:Double>
+  <x:Double x:Key="ColorPreviewerAccentSectionHeight">40</x:Double>
+
+  <ControlTheme x:Key="{x:Type ColorPreviewer}"
+                TargetType="ColorPreviewer">
+    <Setter Property="Height" Value="40" />
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate TargetType="{x:Type ColorPreviewer}">
+        <Panel>
+          <Border BorderBrush="{DynamicResource BcBorderBrush}"
+                  BorderThickness="1"
+                  IsVisible="{TemplateBinding IsAccentColorsVisible}">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Grid Grid.Column="0"
+                    Width="{StaticResource ColorPreviewerAccentSectionWidth}"
+                    ColumnDefinitions="*,*"
+                    VerticalAlignment="Stretch">
+                <Border Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+                <Border x:Name="PART_AccentDecrement2Border"
+                        Grid.Column="0"
+                        Tag="-2"
+                        Background="{TemplateBinding HsvColor, Converter={StaticResource AccentColorConverter}, ConverterParameter='-2'}" />
+                <Border x:Name="PART_AccentDecrement1Border"
+                        Grid.Column="1"
+                        Tag="-1"
+                        Background="{TemplateBinding HsvColor, Converter={StaticResource AccentColorConverter}, ConverterParameter='-1'}" />
+              </Grid>
+              <Grid Grid.Column="2"
+                    Width="{StaticResource ColorPreviewerAccentSectionWidth}"
+                    ColumnDefinitions="*,*"
+                    VerticalAlignment="Stretch">
+                <Border Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+                <Border x:Name="PART_AccentIncrement1Border"
+                        Grid.Column="0"
+                        Tag="1"
+                        Background="{TemplateBinding HsvColor, Converter={StaticResource AccentColorConverter}, ConverterParameter='1'}" />
+                <Border x:Name="PART_AccentIncrement2Border"
+                        Grid.Column="1"
+                        Tag="2"
+                        Background="{TemplateBinding HsvColor, Converter={StaticResource AccentColorConverter}, ConverterParameter='2'}" />
+              </Grid>
+              <Border Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      BorderBrush="{DynamicResource BcBorderBrush}"
+                      BorderThickness="1,0,1,0">
+                <Panel>
+                  <Border Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+                  <Border Background="{TemplateBinding HsvColor, Converter={StaticResource ToBrushConverter}}"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" />
+                </Panel>
+              </Border>
+            </Grid>
+          </Border>
+          <Border BorderBrush="{DynamicResource BcBorderBrush}"
+                  BorderThickness="1"
+                  IsVisible="{TemplateBinding IsAccentColorsVisible, Converter={x:Static BoolConverters.Not}}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+            <Panel>
+              <Border Background="{StaticResource ColorControlCheckeredBackgroundBrush}" />
+              <Border Background="{TemplateBinding HsvColor, Converter={StaticResource ToBrushConverter}}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch" />
+            </Panel>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

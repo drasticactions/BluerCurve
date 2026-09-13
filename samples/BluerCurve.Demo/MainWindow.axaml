@@ -1,0 +1,75 @@
+<chrome:BluerCurveWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:chrome="clr-namespace:BluerCurve.Chrome;assembly=BluerCurve.Theme"
+        xmlns:demo="clr-namespace:BluerCurve.Demo"
+        x:Class="BluerCurve.Demo.MainWindow"
+        x:DataType="demo:MainWindowViewModel"
+        Title="A widget factory - BluerCurve"
+        Width="900" Height="720">
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_Options">
+        <MenuItem Header="Color scheme" ItemsSource="{Binding Variants}">
+          <MenuItem.ItemContainerTheme>
+            <ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="demo:VariantItem">
+              <Setter Property="Header" Value="{Binding Name}" />
+              <Setter Property="Command" Value="{Binding Select}" />
+            </ControlTheme>
+          </MenuItem.ItemContainerTheme>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="Open a plain Window (native or drawn decorations)" Command="{Binding OpenPlainWindow}" />
+        <MenuItem Header="Open a BluerCurveWindow" Command="{Binding OpenBluerCurveWindow}" />
+        <Separator />
+        <MenuItem Header="_Quit" Command="{Binding Quit}" InputGesture="Ctrl+Q" />
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="_Undo" InputGesture="Ctrl+Z" />
+        <MenuItem Header="_Redo" InputGesture="Ctrl+Shift+Z" IsEnabled="False" />
+        <Separator />
+        <MenuItem Header="Cu_t" InputGesture="Ctrl+X" />
+        <MenuItem Header="_Copy" InputGesture="Ctrl+C" />
+        <MenuItem Header="_Paste" InputGesture="Ctrl+V" />
+        <Separator />
+        <MenuItem Header="Word wrap" ToggleType="CheckBox" IsChecked="True" />
+        <MenuItem Header="More">
+          <MenuItem Header="Submenu item 1" />
+          <MenuItem Header="Submenu item 2" />
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="_View">
+        <MenuItem Header="Small" ToggleType="Radio" GroupName="size" IsChecked="True" />
+        <MenuItem Header="Large" ToggleType="Radio" GroupName="size" />
+      </MenuItem>
+      <MenuItem Header="_Help">
+        <MenuItem Header="_About BluerCurve" />
+      </MenuItem>
+    </Menu>
+
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="4" Margin="4,2">
+      <TextBlock Text="Color scheme:" VerticalAlignment="Center" />
+      <ComboBox ItemsSource="{Binding Variants}" SelectedItem="{Binding SelectedVariant}" MinWidth="150">
+        <ComboBox.ItemTemplate>
+          <DataTemplate x:DataType="demo:VariantItem">
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </StackPanel>
+
+    <TabControl Margin="4">
+      <TabItem Header="Widget factory">
+        <demo:WidgetFactoryPage />
+      </TabItem>
+      <TabItem Header="Lists &amp; trees">
+        <demo:ListsPage />
+      </TabItem>
+      <TabItem Header="Pickers">
+        <demo:PickersPage />
+      </TabItem>
+      <TabItem Header="Misc">
+        <demo:MiscPage />
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</chrome:BluerCurveWindow>

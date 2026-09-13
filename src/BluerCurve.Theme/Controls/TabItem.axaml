@@ -1,0 +1,219 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type TabItem}"
+                TargetType="TabItem">
+    <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="3" />
+    <Setter Property="Margin" Value="0,0,-1,0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}" />
+          <Rectangle Name="PART_Overlap" Fill="{TemplateBinding Background}" IsVisible="False" />
+          <Rectangle Name="PART_BevelTop" Height="1" VerticalAlignment="Top" Margin="1,1,1,0" IsVisible="False" />
+          <Rectangle Name="PART_BevelLeft" Width="1" HorizontalAlignment="Left" Margin="1,1,0,1" IsVisible="False" />
+          <Rectangle Name="PART_BevelBottom" Height="1" VerticalAlignment="Bottom" Margin="1,0,1,1" IsVisible="False" />
+          <Rectangle Name="PART_BevelRight" Width="1" HorizontalAlignment="Right" Margin="0,1,1,1" IsVisible="False" />
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Margin="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            RecognizesAccessKey="True"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+          <Rectangle Name="PART_FocusRect"
+                     Margin="3"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,1"
+                     IsVisible="False"
+                     IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ Rectangle#PART_BevelTop, ^ /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="Fill" Value="{DynamicResource BcBevelLightBrush}" />
+    </Style>
+    <Style Selector="^ /template/ Rectangle#PART_BevelBottom, ^ /template/ Rectangle#PART_BevelRight">
+      <Setter Property="Fill" Value="{DynamicResource BcBevelDarkBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+      <Setter Property="ZIndex" Value="1" />
+    </Style>
+    <Style Selector="^:selected /template/ Rectangle#PART_Overlap">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Top]">
+      <Setter Property="Margin" Value="0,0,-1,0" />
+      <Setter Property="Padding" Value="2,3,3,3" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:nth-child(1)">
+      <Setter Property="Padding" Value="3" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top] /template/ Rectangle#PART_BevelTop, ^[TabStripPlacement=Top] /template/ Rectangle#PART_BevelRight">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:nth-child(1) /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected">
+      <Setter Property="Margin" Value="-1,-1,-1,-1" />
+      <Setter Property="Padding" Value="3" />
+      <Setter Property="BorderThickness" Value="1,1,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected:nth-child(1)">
+      <Setter Property="Margin" Value="0,-1,-1,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="0,0,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected /template/ Rectangle#PART_Overlap">
+      <Setter Property="Height" Value="1" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="Margin" Value="1,0,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Margin" Value="1,1,0,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top]:selected /template/ Rectangle#PART_BevelRight">
+      <Setter Property="Margin" Value="0,1,1,0" />
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Bottom]">
+      <Setter Property="Margin" Value="0,0,-1,0" />
+      <Setter Property="Padding" Value="2,3,3,3" />
+      <Setter Property="BorderThickness" Value="1,0,1,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:nth-child(1)">
+      <Setter Property="Padding" Value="3" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ Rectangle#PART_BevelBottom, ^[TabStripPlacement=Bottom] /template/ Rectangle#PART_BevelRight">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:nth-child(1) /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="Margin" Value="1,0,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ Rectangle#PART_BevelRight">
+      <Setter Property="Margin" Value="0,0,1,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:selected">
+      <Setter Property="Margin" Value="-1,-2,-1,-1" />
+      <Setter Property="Padding" Value="3" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:selected:nth-child(1)">
+      <Setter Property="Margin" Value="0,-2,-1,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:selected /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="0,1,0,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:selected /template/ Rectangle#PART_Overlap">
+      <Setter Property="Height" Value="1" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Margin" Value="1,0,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]:selected /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Left]">
+      <Setter Property="Margin" Value="0,0,0,-1" />
+      <Setter Property="Padding" Value="3,3,3,4" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:nth-child(1)">
+      <Setter Property="Padding" Value="3,4,3,4" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ Rectangle#PART_BevelLeft, ^[TabStripPlacement=Left] /template/ Rectangle#PART_BevelBottom">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:nth-child(1) /template/ Rectangle#PART_BevelTop">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected">
+      <Setter Property="Margin" Value="-1,-1,-1,-1" />
+      <Setter Property="Padding" Value="3,4,3,4" />
+      <Setter Property="BorderThickness" Value="1,1,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected:nth-child(1)">
+      <Setter Property="Margin" Value="-1,0,-1,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="0,0,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected /template/ Rectangle#PART_Overlap">
+      <Setter Property="Width" Value="1" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="Margin" Value="0,1,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected /template/ Rectangle#PART_BevelTop">
+      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Margin" Value="1,1,0,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]:selected /template/ Rectangle#PART_BevelBottom">
+      <Setter Property="Margin" Value="1,0,0,1" />
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Right]">
+      <Setter Property="Margin" Value="0,0,0,-1" />
+      <Setter Property="Padding" Value="3,3,3,4" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:nth-child(1)">
+      <Setter Property="Padding" Value="3,4,3,4" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ Rectangle#PART_BevelRight, ^[TabStripPlacement=Right] /template/ Rectangle#PART_BevelBottom">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:nth-child(1) /template/ Rectangle#PART_BevelTop">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected">
+      <Setter Property="Margin" Value="-1,-1,-1,-1" />
+      <Setter Property="Padding" Value="3,4,3,4" />
+      <Setter Property="BorderThickness" Value="0,1,1,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected:nth-child(1)">
+      <Setter Property="Margin" Value="-1,0,-1,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="1,0,0,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected /template/ Rectangle#PART_Overlap">
+      <Setter Property="Width" Value="1" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="Margin" Value="0,1,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected /template/ Rectangle#PART_BevelTop">
+      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Margin" Value="0,1,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]:selected /template/ Rectangle#PART_BevelBottom">
+      <Setter Property="Margin" Value="0,0,1,1" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

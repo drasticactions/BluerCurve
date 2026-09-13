@@ -1,0 +1,111 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <Thickness x:Key="BcRadioButtonPadding">3,1,2,1</Thickness>
+
+  <ControlTheme x:Key="{x:Type RadioButton}"
+                TargetType="RadioButton">
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Padding" Value="{DynamicResource BcRadioButtonPadding}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Row"
+                Background="{TemplateBinding Background}">
+          <Grid ColumnDefinitions="Auto,*">
+            <Panel Width="16"
+                   Height="16"
+                   VerticalAlignment="Center">
+              <Panel Name="indicator"
+                     Width="13"
+                     Height="13"
+                     Margin="1,1,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top">
+                <Ellipse Name="border"
+                         Width="13"
+                         Height="13"
+                         Fill="{TemplateBinding BorderBrush}" />
+                <Ellipse Name="inner"
+                         Width="11"
+                         Height="11"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Fill="{DynamicResource BcWhiteBrush}" />
+                <Ellipse Name="checkMark"
+                         Width="7"
+                         Height="7"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Fill="{DynamicResource BcCheckBrush}" />
+                <Ellipse Name="indeterminateMark"
+                         Width="7"
+                         Height="7"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Fill="{DynamicResource BcInsensitiveFgBrush}" />
+              </Panel>
+            </Panel>
+            <Panel Grid.Column="1"
+                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                   IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+              <Rectangle Name="PART_FocusRect"
+                         Margin="1,0,0,0"
+                         Stroke="{DynamicResource BcOutlineBrush}"
+                         StrokeThickness="1"
+                         StrokeDashArray="1,1"
+                         IsVisible="False"
+                         IsHitTestVisible="False" />
+            </Panel>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="RecognizesAccessKey" Value="True" />
+    </Style>
+
+    <Style Selector="^:pointerover /template/ Border#PART_Row">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ Ellipse#inner">
+      <Setter Property="Fill" Value="{DynamicResource BcDarkerBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^ /template/ Ellipse#checkMark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^ /template/ Ellipse#indeterminateMark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked /template/ Ellipse#checkMark">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:indeterminate /template/ Ellipse#indeterminateMark">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Ellipse#border">
+      <Setter Property="Fill" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Ellipse#inner">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveBaseBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

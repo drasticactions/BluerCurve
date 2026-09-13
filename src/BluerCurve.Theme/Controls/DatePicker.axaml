@@ -1,0 +1,296 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    xmlns:sys="using:System"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Height="500"
+            Padding="20">
+      <StackPanel VerticalAlignment="Center"
+                  Spacing="20">
+        <DatePicker />
+        <DatePicker IsEnabled="False" />
+        <DatePicker>
+          <DataValidationErrors.Error>
+            <sys:Exception>
+              <x:Arguments>
+                <x:String>Error</x:String>
+              </x:Arguments>
+            </sys:Exception>
+          </DataValidationErrors.Error>
+        </DatePicker>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <x:Double x:Key="BcDatePickerMinWidth">240</x:Double>
+  <x:Double x:Key="BcDatePickerMaxWidth">456</x:Double>
+  <x:Double x:Key="BcDatePickerFlyoutWidth">240</x:Double>
+  <x:Double x:Key="BcDatePickerFlyoutMaxHeight">262</x:Double>
+  <Thickness x:Key="BcDatePickerHostPadding">0,4</Thickness>
+  <Thickness x:Key="BcDatePickerHostMonthPadding">8,4,0,4</Thickness>
+
+  <ControlTheme x:Key="BcDatePickerFlyoutButton"
+                TargetType="Button">
+    <Setter Property="RenderTransform" Value="none" />
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <Panel>
+            <ContentPresenter Name="PART_ContentPresenter"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch"
+                              Content="{TemplateBinding Content}"
+                              TextElement.Foreground="{TemplateBinding Foreground}" />
+            <Rectangle Name="PART_FocusRect"
+                       Margin="2"
+                       Stroke="{DynamicResource BcOutlineBrush}"
+                       StrokeThickness="1"
+                       StrokeDashArray="1,1"
+                       IsVisible="False"
+                       IsHitTestVisible="False" />
+          </Panel>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type DatePicker}"
+                TargetType="DatePicker">
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <Grid Name="LayoutRoot"
+                Margin="{TemplateBinding Padding}">
+
+            <Button Name="PART_FlyoutButton"
+                    MinWidth="{DynamicResource BcDatePickerMinWidth}"
+                    MaxWidth="{DynamicResource BcDatePickerMaxWidth}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Foreground="{TemplateBinding Foreground}"
+                    IsEnabled="{TemplateBinding IsEnabled}"
+                    TemplatedControl.IsTemplateFocusTarget="True"
+                    Theme="{StaticResource BcDatePickerFlyoutButton}">
+              <Grid Name="PART_ButtonContentGrid"
+                    ColumnDefinitions="78*,Auto,132*,Auto,78*">
+                <TextBlock Name="PART_DayTextBlock"
+                           Padding="{DynamicResource BcDatePickerHostPadding}"
+                           HorizontalAlignment="Center"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"
+                           Text="{DynamicResource StringDatePickerDayText}" />
+                <TextBlock Name="PART_MonthTextBlock"
+                           Padding="{DynamicResource BcDatePickerHostMonthPadding}"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"
+                           Text="{DynamicResource StringDatePickerMonthText}"
+                           TextAlignment="Left" />
+                <TextBlock Name="PART_YearTextBlock"
+                           Padding="{DynamicResource BcDatePickerHostPadding}"
+                           HorizontalAlignment="Center"
+                           FontFamily="{TemplateBinding FontFamily}"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"
+                           Text="{DynamicResource StringDatePickerYearText}" />
+                <Rectangle x:Name="PART_FirstSpacer"
+                           Grid.Column="1"
+                           Width="1"
+                           HorizontalAlignment="Center"
+                           Fill="{DynamicResource BcMediumBorderBrush}" />
+                <Rectangle x:Name="PART_SecondSpacer"
+                           Grid.Column="3"
+                           Width="1"
+                           HorizontalAlignment="Center"
+                           Fill="{DynamicResource BcMediumBorderBrush}" />
+              </Grid>
+            </Button>
+
+            <Popup Name="PART_Popup"
+                   IsLightDismissEnabled="True"
+                   Placement="Bottom"
+                   PlacementTarget="{TemplateBinding}"
+                   WindowManagerAddShadowHint="False">
+              <DatePickerPresenter Name="PART_PickerPresenter" />
+            </Popup>
+
+          </Grid>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ Button#PART_FlyoutButton TextBlock">
+      <Setter Property="VerticalAlignment" Value="{TemplateBinding VerticalContentAlignment}"/>
+    </Style>
+
+    <Style Selector="^:hasnodate /template/ Button#PART_FlyoutButton TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type DatePickerPresenter}"
+                TargetType="DatePickerPresenter">
+    <Setter Property="Width" Value="{DynamicResource BcDatePickerFlyoutWidth}" />
+    <Setter Property="MinWidth" Value="{DynamicResource BcDatePickerFlyoutWidth}" />
+    <Setter Property="MaxHeight" Value="{DynamicResource BcDatePickerFlyoutMaxHeight}" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="{DynamicResource BcDateTimePickerFlyoutPadding}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="Background"
+                        MaxHeight="{TemplateBinding MaxHeight}"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <Grid Name="ContentRoot"
+                RowDefinitions="*,Auto">
+            <Grid Name="PART_PickerContainer">
+              <Grid.Styles>
+                <Style Selector="DateTimePickerPanel > ListBoxItem">
+                  <Setter Property="Theme" Value="{StaticResource BcDateTimePickerItem}" />
+                </Style>
+              </Grid.Styles>
+              <Panel Name="PART_MonthHost">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Hidden">
+                  <DateTimePickerPanel Name="PART_MonthSelector"
+                                       ItemHeight="{DynamicResource BcDateTimePickerItemHeight}"
+                                       PanelType="Month"
+                                       ShouldLoop="True" />
+                </ScrollViewer>
+                <RepeatButton Name="PART_MonthUpButton"
+                              Theme="{StaticResource BcDateTimePickerUpButton}" />
+                <RepeatButton Name="PART_MonthDownButton"
+                              Theme="{StaticResource BcDateTimePickerDownButton}" />
+              </Panel>
+              <Panel Name="PART_DayHost">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Hidden">
+                  <DateTimePickerPanel Name="PART_DaySelector"
+                                       ItemHeight="{DynamicResource BcDateTimePickerItemHeight}"
+                                       PanelType="Day"
+                                       ShouldLoop="True" />
+                </ScrollViewer>
+                <RepeatButton Name="PART_DayUpButton"
+                              Theme="{StaticResource BcDateTimePickerUpButton}" />
+                <RepeatButton Name="PART_DayDownButton"
+                              Theme="{StaticResource BcDateTimePickerDownButton}" />
+              </Panel>
+              <Panel Name="PART_YearHost">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Hidden">
+                  <DateTimePickerPanel Name="PART_YearSelector"
+                                       ItemHeight="{DynamicResource BcDateTimePickerItemHeight}"
+                                       PanelType="Year"
+                                       ShouldLoop="False" />
+                </ScrollViewer>
+                <RepeatButton Name="PART_YearUpButton"
+                              Theme="{StaticResource BcDateTimePickerUpButton}" />
+                <RepeatButton Name="PART_YearDownButton"
+                              Theme="{StaticResource BcDateTimePickerDownButton}" />
+              </Panel>
+              <bc:BevelBorder Name="HighlightRect"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="5"
+                              Height="{DynamicResource BcDateTimePickerItemHeight}"
+                              VerticalAlignment="Center"
+                              IsHitTestVisible="False"
+                              ZIndex="-1"
+                              Background="{DynamicResource BcMenuItemGradientBrush}"
+                              BorderBrush="{DynamicResource BcMenuItemBorderBrush}"
+                              BorderThickness="1"
+                              Bevel="Raised"
+                              LightBrush="{DynamicResource BcMenuItemLightBrush}"
+                              DarkBrush="{DynamicResource BcMenuItemDarkBrush}" />
+              <Rectangle Name="PART_FirstSpacer"
+                         Grid.Column="1"
+                         Width="1"
+                         HorizontalAlignment="Center"
+                         Fill="{DynamicResource BcMediumBorderBrush}" />
+              <Rectangle Name="PART_SecondSpacer"
+                         Grid.Column="3"
+                         Width="1"
+                         HorizontalAlignment="Center"
+                         Fill="{DynamicResource BcMediumBorderBrush}" />
+            </Grid>
+
+            <Grid Name="AcceptDismissGrid"
+                  Grid.Row="1"
+                  Margin="0,3,0,0"
+                  ColumnDefinitions="*,*">
+              <Button Name="PART_AcceptButton"
+                      Grid.Column="0"
+                      Margin="0,0,1,0"
+                      Height="{DynamicResource BcDateTimePickerAcceptDismissHeight}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Theme="{StaticResource BcDateTimePickerButton}">
+                <Path Width="13" Height="13" Data="{StaticResource BcCheckGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+              </Button>
+              <Button Name="PART_DismissButton"
+                      Grid.Column="1"
+                      Margin="1,0,0,0"
+                      Height="{DynamicResource BcDateTimePickerAcceptDismissHeight}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Theme="{StaticResource BcDateTimePickerButton}">
+                <Path Width="9" Height="9" Data="{StaticResource BcCaptionCloseGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+              </Button>
+            </Grid>
+          </Grid>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ Panel">
+      <Style Selector="^:pointerover RepeatButton">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,77 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <StackPanel Spacing="20">
+        <HyperlinkButton Content="Click Me!" />
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type HyperlinkButton}" TargetType="HyperlinkButton">
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource BcLinkBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Padding" Value="{DynamicResource BcButtonPadding}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="Transparent"
+                        DarkBrush="Transparent">
+          <Panel>
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Padding="{TemplateBinding Padding}"
+                              RecognizesAccessKey="True"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              TextElement.Foreground="{TemplateBinding Foreground}" />
+            <Rectangle Name="PART_FocusRect"
+                       Margin="2"
+                       Stroke="{DynamicResource BcOutlineBrush}"
+                       StrokeThickness="1"
+                       StrokeDashArray="1,1"
+                       IsVisible="False"
+                       IsHitTestVisible="False" />
+          </Panel>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+      <Setter Property="LightBrush" Value="{DynamicResource BcBevelLightBrush}" />
+      <Setter Property="DarkBrush" Value="{DynamicResource BcBevelDarkBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+      <Setter Property="LightBrush" Value="{DynamicResource BcBevelLightBrush}" />
+      <Setter Property="DarkBrush" Value="{DynamicResource BcBevelDarkBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:visited">
+      <Setter Property="Foreground" Value="{DynamicResource BcLinkVisitedBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

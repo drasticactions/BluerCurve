@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="using:System"
+                    x:ClassModifier="internal">
+  <FontFamily x:Key="BcFontFamily">avares://BluerCurve.Theme/Fonts#Luxi Sans, $Default</FontFamily>
+  <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="BcFontFamily" />
+
+  <sys:Double x:Key="FontSizeSmall">11</sys:Double>
+  <sys:Double x:Key="FontSizeNormal">13</sys:Double>
+  <sys:Double x:Key="FontSizeLarge">16</sys:Double>
+
+  <Thickness x:Key="ThemeBorderThickness">1</Thickness>
+  <Thickness x:Key="BcButtonPadding">4</Thickness>
+  <Thickness x:Key="BcEntryPadding">3</Thickness>
+  <Thickness x:Key="BcMenuItemPadding">6,3,5,3</Thickness>
+  <sys:Double x:Key="ThemeDisabledOpacity">1</sys:Double>
+
+  <sys:Double x:Key="ScrollBarThickness">15</sys:Double>
+  <sys:Double x:Key="ScrollBarThumbThickness">15</sys:Double>
+  <sys:Double x:Key="BcScrollBarStepperSize">15</sys:Double>
+  <sys:Double x:Key="BcScrollBarMinThumbLength">26</sys:Double>
+  <sys:Double x:Key="BcSliderThumbLength">31</sys:Double>
+  <sys:Double x:Key="BcSliderThumbThickness">15</sys:Double>
+  <sys:Double x:Key="BcIndicatorSize">13</sys:Double>
+  <sys:Double x:Key="BcProgressBarThickness">18</sys:Double>
+
+  <sys:Double x:Key="IconElementThemeHeight">16</sys:Double>
+  <sys:Double x:Key="IconElementThemeWidth">16</sys:Double>
+  <sys:Double x:Key="TextControlPlaceholderOpacity">0.5</sys:Double>
+
+  <sys:Double x:Key="BcTitleBarHeight">22</sys:Double>
+  <Thickness x:Key="BcFrameThickness">5</Thickness>
+  <sys:Double x:Key="BcCaptionButtonSize">18</sys:Double>
+  <sys:Double x:Key="BcCaptionButtonHeight">16</sys:Double>
+  <CornerRadius x:Key="BcFrameCornerRadius">5</CornerRadius>
+</ResourceDictionary>

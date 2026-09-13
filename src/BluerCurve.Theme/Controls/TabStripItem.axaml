@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type TabStripItem}"
+                TargetType="TabStripItem">
+    <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="2,3,3,3" />
+    <Setter Property="Margin" Value="0,0,-1,0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}" />
+          <Rectangle Name="PART_BevelTop" Height="1" VerticalAlignment="Top" Margin="1,1,1,0" Fill="{DynamicResource BcBevelLightBrush}" />
+          <Rectangle Name="PART_BevelLeft" Width="1" HorizontalAlignment="Left" Margin="1,1,0,0" Fill="{DynamicResource BcBevelLightBrush}" IsVisible="False" />
+          <Rectangle Name="PART_BevelRight" Width="1" HorizontalAlignment="Right" Margin="0,1,1,0" Fill="{DynamicResource BcBevelDarkBrush}" />
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Margin="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+          <Rectangle Name="PART_FocusRect"
+                     Margin="3"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,1"
+                     IsVisible="False"
+                     IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:nth-child(1)">
+      <Setter Property="Padding" Value="3" />
+    </Style>
+    <Style Selector="^:nth-child(1) /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+      <Setter Property="BorderThickness" Value="1,1,1,0" />
+      <Setter Property="Margin" Value="-1,-1,-1,0" />
+      <Setter Property="Padding" Value="3" />
+      <Setter Property="ZIndex" Value="1" />
+    </Style>
+    <Style Selector="^:selected:nth-child(1)">
+      <Setter Property="Margin" Value="0,-1,-1,0" />
+    </Style>
+    <Style Selector="^:selected /template/ Rectangle#PART_BevelLeft">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <RootNamespace>BluerCurve</RootNamespace>
+    <PackageId>BluerCurve</PackageId>
+    <Description>Bluecurve theme for Avalonia</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Fonts/*.ttf" />
+    <None Include="Fonts/LICENSE-Luxi.txt" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

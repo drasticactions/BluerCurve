@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BluerCurve.Theme/BluerCurve.Theme.csproj" />
+    <Project Path="src/BluerCurve.Theme.ColorPicker/BluerCurve.Theme.ColorPicker.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/BluerCurve.Demo/BluerCurve.Demo.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BluerCurve.Theme.Tests/BluerCurve.Theme.Tests.csproj" />
+  </Folder>
+</Solution>

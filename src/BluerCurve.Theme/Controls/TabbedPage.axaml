@@ -1,0 +1,236 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Width="400" Height="400">
+      <TabbedPage>
+        <ContentPage Header="Home">
+          <TextBlock Text="Home page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </ContentPage>
+        <ContentPage Header="Favorites">
+          <TextBlock Text="Favorites page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </ContentPage>
+      </TabbedPage>
+    </Border>
+  </Design.PreviewWith>
+
+  <x:Double x:Key="BcTabbedPageTabItemHeaderMinHeight">24</x:Double>
+  <x:Double x:Key="BcTabbedPageTabItemHeaderPipeThickness">2</x:Double>
+  <Thickness x:Key="BcTabbedPageTabItemHeaderPadding">6,3</Thickness>
+  <x:Double x:Key="BcTabbedPageTabItemHeaderIconSize">16</x:Double>
+  <x:Double x:Key="BcTabbedPageTabItemHeaderSpacing">4</x:Double>
+  <Thickness x:Key="BcTabbedPageTabStripPadding">1,0,0,1</Thickness>
+
+  <ControlTheme x:Key="TabbedPageTabControlTheme" TargetType="TabControl">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <Border Name="PART_TabStrip"
+                  Background="Transparent"
+                  Padding="{DynamicResource BcTabbedPageTabStripPadding}"
+                  ZIndex="1"
+                  DockPanel.Dock="{TemplateBinding TabStripPlacement}">
+            <ItemsPresenter Name="PART_ItemsPresenter">
+              <ItemsPresenter.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+              </ItemsPresenter.ItemsPanel>
+            </ItemsPresenter>
+          </Border>
+          <bc:BevelBorder Name="PART_ContentFrame"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}"
+                          Padding="{TemplateBinding Padding}">
+            <Panel ClipToBounds="True">
+              <ContentPresenter Name="PART_SelectedContentHost2"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                IsVisible="False" />
+              <ContentPresenter Name="PART_SelectedContentHost"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch" />
+            </Panel>
+          </bc:BevelBorder>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter > UniformGrid,
+           ^[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter > UniformGrid">
+      <Setter Property="Rows" Value="0" />
+      <Setter Property="Columns" Value="1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top] /template/ Border#PART_TabStrip">
+      <Setter Property="Margin" Value="0,0,0,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ Border#PART_TabStrip">
+      <Setter Property="Margin" Value="0,-1,0,0" />
+      <Setter Property="Padding" Value="1,1,0,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ Border#PART_TabStrip">
+      <Setter Property="Margin" Value="0,0,-1,0" />
+      <Setter Property="Padding" Value="0,1,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ Border#PART_TabStrip">
+      <Setter Property="Margin" Value="-1,0,0,0" />
+      <Setter Property="Padding" Value="1,1,0,0" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="TabbedPageTabItemTheme" TargetType="TabItem">
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Padding" Value="{DynamicResource BcTabbedPageTabItemHeaderPadding}" />
+    <Setter Property="Margin" Value="0,0,-1,0" />
+    <Setter Property="MinHeight" Value="{DynamicResource BcTabbedPageTabItemHeaderMinHeight}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="IndicatorTemplate">
+      <DataTemplate>
+        <Border Background="{DynamicResource BcBgBrush}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" />
+      </DataTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <bc:BevelBorder Name="PART_LayoutRoot"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}"
+                          Padding="{TemplateBinding Padding}">
+            <StackPanel Name="PART_HeaderPanel"
+                        Spacing="{DynamicResource BcTabbedPageTabItemHeaderSpacing}"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+              <ContentPresenter Name="PART_IconPresenter"
+                                Content="{TemplateBinding Icon}"
+                                ContentTemplate="{TemplateBinding IconTemplate}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                Width="{DynamicResource BcTabbedPageTabItemHeaderIconSize}"
+                                Height="{DynamicResource BcTabbedPageTabItemHeaderIconSize}" />
+              <ContentPresenter Name="PART_ContentPresenter"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Content="{TemplateBinding Header}"
+                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="{TemplateBinding FontWeight}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+            </StackPanel>
+          </bc:BevelBorder>
+          <ContentPresenter Name="PART_SelectedPipe"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Content="{TemplateBinding DataContext}"
+                            ContentTemplate="{TemplateBinding IndicatorTemplate}"
+                            IsHitTestVisible="False"
+                            IsVisible="False" />
+          <Rectangle Name="PART_FocusRect"
+                     Margin="3"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,1"
+                     IsVisible="False"
+                     IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+      <Setter Property="ZIndex" Value="1" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_SelectedPipe">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Top] /template/ ContentPresenter#PART_SelectedPipe">
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="2,0,2,0" />
+      <Setter Property="Height" Value="{DynamicResource BcTabbedPageTabItemHeaderPipeThickness}" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ ContentPresenter#PART_SelectedPipe">
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="2,0,2,0" />
+      <Setter Property="Height" Value="{DynamicResource BcTabbedPageTabItemHeaderPipeThickness}" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ ContentPresenter#PART_SelectedPipe">
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="0,2,0,2" />
+      <Setter Property="Width" Value="{DynamicResource BcTabbedPageTabItemHeaderPipeThickness}" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ ContentPresenter#PART_SelectedPipe">
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="0,2,0,2" />
+      <Setter Property="Width" Value="{DynamicResource BcTabbedPageTabItemHeaderPipeThickness}" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left], ^[TabStripPlacement=Right]">
+      <Setter Property="Margin" Value="0,0,0,-1" />
+    </Style>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:selected:pointerover /template/ bc|BevelBorder#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    </Style>
+
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type TabbedPage}" TargetType="TabbedPage">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="{TemplateBinding Background}">
+          <TabControl Name="PART_TabControl"
+                      Theme="{StaticResource TabbedPageTabControlTheme}"
+                      ItemContainerTheme="{StaticResource TabbedPageTabItemTheme}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

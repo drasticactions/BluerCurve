@@ -1,0 +1,309 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+
+  <MenuFlyout x:Key="BcVerticalScrollBarContextFlyout">
+    <MenuItem Header="{DynamicResource StringScrollBarScrollHere}" Command="{Binding $parent[ScrollBar].ScrollHere}" AutomationProperties.AutomationId="ScrollHere" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarTop}" Command="{Binding $parent[ScrollBar].ScrollToHome}" AutomationProperties.AutomationId="Top" />
+    <MenuItem Header="{DynamicResource StringScrollBarBottom}" Command="{Binding $parent[ScrollBar].ScrollToEnd}" AutomationProperties.AutomationId="Bottom" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarPageUp}" Command="{Binding $parent[ScrollBar].PageUp}" AutomationProperties.AutomationId="PageUp" />
+    <MenuItem Header="{DynamicResource StringScrollBarPageDown}" Command="{Binding $parent[ScrollBar].PageDown}" AutomationProperties.AutomationId="PageDown" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarScrollUp}" Command="{Binding $parent[ScrollBar].LineUp}" AutomationProperties.AutomationId="ScrollUp" />
+    <MenuItem Header="{DynamicResource StringScrollBarScrollDown}" Command="{Binding $parent[ScrollBar].LineDown}" AutomationProperties.AutomationId="ScrollDown" />
+  </MenuFlyout>
+
+  <MenuFlyout x:Key="BcHorizontalScrollBarContextFlyout">
+    <MenuItem Header="{DynamicResource StringScrollBarScrollHere}" Command="{Binding $parent[ScrollBar].ScrollHere}" AutomationProperties.AutomationId="ScrollHere" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarLeftEdge}" Command="{Binding $parent[ScrollBar].ScrollToHome}" AutomationProperties.AutomationId="LeftEdge" />
+    <MenuItem Header="{DynamicResource StringScrollBarRightEdge}" Command="{Binding $parent[ScrollBar].ScrollToEnd}" AutomationProperties.AutomationId="RightEdge" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarPageLeft}" Command="{Binding $parent[ScrollBar].PageLeft}" AutomationProperties.AutomationId="PageLeft" />
+    <MenuItem Header="{DynamicResource StringScrollBarPageRight}" Command="{Binding $parent[ScrollBar].PageRight}" AutomationProperties.AutomationId="PageRight" />
+    <Separator />
+    <MenuItem Header="{DynamicResource StringScrollBarScrollLeft}" Command="{Binding $parent[ScrollBar].LineLeft}" AutomationProperties.AutomationId="ScrollLeft" />
+    <MenuItem Header="{DynamicResource StringScrollBarScrollRight}" Command="{Binding $parent[ScrollBar].LineRight}" AutomationProperties.AutomationId="ScrollRight" />
+  </MenuFlyout>
+  <StreamGeometry x:Key="BcScrollBarGripDownGeometry">M0,0 L1,0 L3.5,2.7 L6,0 L7,0 L3.5,4 Z</StreamGeometry>
+  <ControlTheme x:Key="BcScrollBarStepperTheme" TargetType="RepeatButton">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Width" Value="{DynamicResource BcScrollBarStepperSize}" />
+    <Setter Property="Height" Value="{DynamicResource BcScrollBarStepperSize}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcScrollBarPageButtonTheme" TargetType="RepeatButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="Transparent" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcScrollBarThumbTheme" TargetType="Thumb">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Style Selector="^ /template/ Path.grip">
+      <Setter Property="Fill" Value="{DynamicResource BcBorderBrush}" />
+    </Style>
+    <Style Selector="^ /template/ Path.gripShadow">
+      <Setter Property="Fill" Value="{DynamicResource BcWhiteBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcScrollBarThumbVerticalTheme" TargetType="Thumb" BasedOn="{StaticResource BcScrollBarThumbTheme}">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <StackPanel Name="PART_Grip" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Panel Width="7" Height="5">
+                <Path Classes="gripShadow" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,1,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+              <Panel Width="7" Height="5">
+                <Path Classes="gripShadow" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,1,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+              <Panel Width="7" Height="5">
+                <Path Classes="gripShadow" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,1,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcScrollBarGripDownGeometry}" Width="7" Height="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+            </StackPanel>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcScrollBarThumbHorizontalTheme" TargetType="Thumb" BasedOn="{StaticResource BcScrollBarThumbTheme}">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <StackPanel Name="PART_Grip" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Panel Width="5" Height="7">
+                <Path Classes="gripShadow" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,0,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+              <Panel Width="5" Height="7">
+                <Path Classes="gripShadow" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,0,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+              <Panel Width="5" Height="7">
+                <Path Classes="gripShadow" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,0,0,0" />
+                <Path Classes="grip" Data="{StaticResource BcGripChevronGeometry}" Width="4" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              </Panel>
+            </StackPanel>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ScrollBar}"
+                TargetType="ScrollBar">
+    <Setter Property="Cursor" Value="Arrow" />
+    <Setter Property="Background" Value="{DynamicResource BcTroughBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+
+    <Style Selector="^:horizontal">
+      <Setter Property="ContextFlyout" Value="{StaticResource BcHorizontalScrollBarContextFlyout}" />
+      <Setter Property="Height" Value="{DynamicResource ScrollBarThickness}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*,Auto" Background="{TemplateBinding Background}">
+            <RepeatButton Name="PART_LineUpButton"
+                          Grid.Column="0"
+                          Theme="{StaticResource BcScrollBarStepperTheme}"
+                          Focusable="False"
+                          AutomationProperties.Name="Column left">
+              <Panel Width="4" Height="7">
+                <Path Classes="arrowShadow" Data="{StaticResource BcArrowLeftGeometry}" Width="4" Height="7" />
+                <Path Classes="arrow" Data="{StaticResource BcArrowLeftGeometry}" Width="4" Height="7" />
+              </Panel>
+            </RepeatButton>
+            <Panel Grid.Column="1">
+              <Border Name="PART_Trough"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="0,1" />
+              <Track Maximum="{TemplateBinding Maximum}"
+                     Minimum="{TemplateBinding Minimum}"
+                     Orientation="{TemplateBinding Orientation}"
+                     ViewportSize="{TemplateBinding ViewportSize}"
+                     DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                     Value="{TemplateBinding Value,
+                                             Mode=TwoWay}">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_PageUpButton"
+                                Theme="{StaticResource BcScrollBarPageButtonTheme}"
+                                Focusable="False"
+                                AutomationProperties.Name="Page left"/>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_PageDownButton"
+                                Theme="{StaticResource BcScrollBarPageButtonTheme}"
+                                Focusable="False"
+                                AutomationProperties.Name="Page right"/>
+                </Track.IncreaseButton>
+                <Thumb Name="thumb"
+                       Theme="{StaticResource BcScrollBarThumbHorizontalTheme}"
+                       AutomationProperties.Name="Position"/>
+              </Track>
+            </Panel>
+            <RepeatButton Name="PART_LineDownButton"
+                          Grid.Column="2"
+                          Theme="{StaticResource BcScrollBarStepperTheme}"
+                          Focusable="False"
+                          AutomationProperties.Name="Column right">
+              <Panel Width="4" Height="7">
+                <Path Classes="arrowShadow" Data="{StaticResource BcArrowRightGeometry}" Width="4" Height="7" />
+                <Path Classes="arrow" Data="{StaticResource BcArrowRightGeometry}" Width="4" Height="7" />
+              </Panel>
+            </RepeatButton>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="^:vertical">
+      <Setter Property="ContextFlyout" Value="{StaticResource BcVerticalScrollBarContextFlyout}" />
+      <Setter Property="Width" Value="{DynamicResource ScrollBarThickness}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid RowDefinitions="Auto,*,Auto" Background="{TemplateBinding Background}">
+            <RepeatButton Name="PART_LineUpButton"
+                          Grid.Row="0"
+                          Theme="{StaticResource BcScrollBarStepperTheme}"
+                          Focusable="False"
+                          AutomationProperties.Name="Line up">
+              <Panel Width="7" Height="4">
+                <Path Classes="arrowShadow" Data="{StaticResource BcArrowUpGeometry}" Width="7" Height="4" />
+                <Path Classes="arrow" Data="{StaticResource BcArrowUpGeometry}" Width="7" Height="4" />
+              </Panel>
+            </RepeatButton>
+            <Panel Grid.Row="1">
+              <Border Name="PART_Trough"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="1,0" />
+              <Track IsDirectionReversed="True"
+                     Maximum="{TemplateBinding Maximum}"
+                     Minimum="{TemplateBinding Minimum}"
+                     Orientation="{TemplateBinding Orientation}"
+                     ViewportSize="{TemplateBinding ViewportSize}"
+                     DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                     Value="{TemplateBinding Value,
+                                             Mode=TwoWay}">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_PageUpButton"
+                                Theme="{StaticResource BcScrollBarPageButtonTheme}"
+                                Focusable="False"
+                                AutomationProperties.Name="Page up"/>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_PageDownButton"
+                                Theme="{StaticResource BcScrollBarPageButtonTheme}"
+                                Focusable="False"
+                                AutomationProperties.Name="Page down"/>
+                </Track.IncreaseButton>
+                <Thumb Name="thumb"
+                       Theme="{StaticResource BcScrollBarThumbVerticalTheme}"
+                       AutomationProperties.Name="Position"/>
+              </Track>
+            </Panel>
+            <RepeatButton Name="PART_LineDownButton"
+                          Grid.Row="2"
+                          Theme="{StaticResource BcScrollBarStepperTheme}"
+                          Focusable="False"
+                          AutomationProperties.Name="Line down">
+              <Panel Width="7" Height="4">
+                <Path Classes="arrowShadow" Data="{StaticResource BcArrowDownGeometry}" Width="7" Height="4" />
+                <Path Classes="arrow" Data="{StaticResource BcArrowDownGeometry}" Width="7" Height="4" />
+              </Panel>
+            </RepeatButton>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:horizontal /template/ Thumb#thumb">
+      <Setter Property="MinWidth" Value="{DynamicResource BcScrollBarMinThumbLength}" />
+      <Setter Property="Height" Value="{DynamicResource ScrollBarThumbThickness}" />
+    </Style>
+    <Style Selector="^:vertical /template/ Thumb#thumb">
+      <Setter Property="MinHeight" Value="{DynamicResource BcScrollBarMinThumbLength}" />
+      <Setter Property="Width" Value="{DynamicResource ScrollBarThumbThickness}" />
+    </Style>
+
+    <Style Selector="^ /template/ RepeatButton Path.arrow">
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconBrush}" />
+    </Style>
+    <Style Selector="^ /template/ RepeatButton Path.arrowShadow">
+      <Setter Property="Fill" Value="{DynamicResource BcDisabledTextShadowBrush}" />
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="RenderTransform">
+        <TranslateTransform X="1" Y="1" />
+      </Setter>
+    </Style>
+    <Style Selector="^ /template/ RepeatButton:pointerover Path.arrow">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^ /template/ RepeatButton:pressed Path.arrow">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^ /template/ RepeatButton:disabled Path.arrow">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^ /template/ RepeatButton:disabled Path.arrowShadow">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

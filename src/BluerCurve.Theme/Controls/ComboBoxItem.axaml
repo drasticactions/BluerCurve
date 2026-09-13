@@ -1,0 +1,47 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type ComboBoxItem}"
+                TargetType="ComboBoxItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Padding" Value="{DynamicResource BcMenuItemPadding}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="Transparent"
+                        DarkBrush="Transparent">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover, ^:selected">
+      <Setter Property="Foreground" Value="{DynamicResource BcSelectedFgBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel, ^:selected /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcMenuItemGradientBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMenuItemBorderBrush}" />
+      <Setter Property="LightBrush" Value="{DynamicResource BcMenuItemLightBrush}" />
+      <Setter Property="DarkBrush" Value="{DynamicResource BcMenuItemDarkBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

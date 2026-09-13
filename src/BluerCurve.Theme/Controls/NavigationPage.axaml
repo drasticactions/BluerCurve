@@ -1,0 +1,153 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Width="400" Height="600">
+      <NavigationPage />
+    </Border>
+  </Design.PreviewWith>
+  <ControlTheme x:Key="{x:Type NavigationPage}" TargetType="NavigationPage">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="PageTransition">
+      <Setter.Value>
+        <PageSlide Duration="0:0:0.3" Orientation="Horizontal" FillMode="Forward">
+          <PageSlide.SlideInEasing>
+            <SplineEasing X1="0.16" Y1="1" X2="0.3" Y2="1" />
+          </PageSlide.SlideInEasing>
+          <PageSlide.SlideOutEasing>
+            <SplineEasing X1="0.2" Y1="0.85" X2="0.3" Y2="1" />
+          </PageSlide.SlideOutEasing>
+        </PageSlide>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ModalTransition">
+      <Setter.Value>
+        <PageSlide Duration="0:0:0.25" Orientation="Vertical" FillMode="Forward">
+          <PageSlide.SlideInEasing>
+            <SplineEasing X1="0.16" Y1="1" X2="0.3" Y2="1" />
+          </PageSlide.SlideInEasing>
+          <PageSlide.SlideOutEasing>
+            <SplineEasing X1="0.2" Y1="0.85" X2="0.3" Y2="1" />
+          </PageSlide.SlideOutEasing>
+        </PageSlide>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel ClipToBounds="True">
+          <DockPanel>
+            <Border Name="PART_NavBarSpacer"
+                    Height="{TemplateBinding EffectiveBarHeight}"
+                    IsVisible="False"
+                    DockPanel.Dock="Top" />
+
+            <ContentPresenter Name="PART_BottomCommandBar"
+                              DockPanel.Dock="Bottom"
+                              HorizontalContentAlignment="Stretch"
+                              Background="{TemplateBinding Background}"
+                              Content="{Binding CurrentPage?.(NavigationPage.BottomCommandBar), RelativeSource={RelativeSource TemplatedParent}, FallbackValue={x:Null}}" />
+
+            <Grid Name="PART_ContentHost"
+                  Background="{TemplateBinding Background}"
+                  ClipToBounds="True">
+              <ContentPresenter Name="PART_PageBackPresenter"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+              <ContentPresenter Name="PART_PagePresenter"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+            </Grid>
+          </DockPanel>
+
+          <Border Name="PART_NavigationBar"
+                  ZIndex="1"
+                  VerticalAlignment="Top"
+                  ClipToBounds="True"
+                  Height="{TemplateBinding EffectiveBarHeight}">
+            <Grid Margin="4,0,0,0" ColumnDefinitions="Auto, *, Auto">
+              <Button x:Name="PART_BackButton"
+                      Grid.Column="0"
+                      IsVisible="{TemplateBinding IsBackButtonEffectivelyVisible}"
+                      VerticalAlignment="Center"
+                      MinWidth="24"
+                      Padding="6,4"
+                      ToolTip.Tip="{x:Null}">
+                <Panel Background="Transparent">
+                  <Path Data="{StaticResource BcArrowLeftGeometry}"
+                        x:Name="PART_BackButtonDefaultIcon"
+                        Fill="{DynamicResource BcButtonIconBrush}"
+                        Width="4"
+                        Height="7"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                  <ContentPresenter
+                    x:Name="PART_BackButtonContentPresenter"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                </Panel>
+              </Button>
+
+              <ContentPresenter Name="PART_Header"
+                                Grid.Column="1"
+                                FontSize="{DynamicResource FontSizeNormal}"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource BcFgBrush}"
+                                Content="{Binding CurrentPage?.Header, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={x:Null}}"
+                                ContentTemplate="{Binding CurrentPage?.HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={x:Null}}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                Margin="6,0,6,0" />
+
+              <ContentPresenter Name="PART_TopCommandBar"
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                VerticalContentAlignment="Stretch"
+                                Foreground="{DynamicResource BcFgBrush}"
+                                Content="{Binding CurrentPage?.(NavigationPage.TopCommandBar), RelativeSource={RelativeSource TemplatedParent}, FallbackValue={x:Null}}">
+                <ContentPresenter.Styles>
+                  <Style Selector="CommandBar">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="MinHeight" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                  </Style>
+                </ContentPresenter.Styles>
+              </ContentPresenter>
+            </Grid>
+          </Border>
+          <Border Name="PART_NavBarShadow"
+                  ZIndex="1"
+                  VerticalAlignment="Top"
+                  IsVisible="False"
+                  Height="1"
+                  Background="{DynamicResource BcTroughBgBrush}"
+                  IsHitTestVisible="False" />
+
+          <ContentPresenter Name="PART_ModalBackPresenter"
+                            ZIndex="99"
+                            IsVisible="False"
+                            Background="{TemplateBinding Background}" />
+          <ContentPresenter Name="PART_ModalPresenter"
+                            ZIndex="100"
+                            IsVisible="False"
+                            Background="{TemplateBinding Background}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^ /template/ Border#PART_NavigationBar">
+      <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcTroughBgBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+
+    <Style Selector="^:nav-bar-inset /template/ Border#PART_NavBarSpacer">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:nav-bar-compact /template/ ContentPresenter#PART_TopCommandBar CommandBar">
+      <Setter Property="DefaultLabelPosition" Value="Collapsed" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

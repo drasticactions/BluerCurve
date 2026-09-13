@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <RootNamespace>BluerCurve.ColorPicker</RootNamespace>
+    <PackageId>BluerCurve.ColorPicker</PackageId>
+    <Description>Bluecurve styles for the Avalonia ColorPicker controls.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaVersion)" />
+    <ProjectReference Include="../BluerCurve.Theme/BluerCurve.Theme.csproj" />
+  </ItemGroup>
+</Project>

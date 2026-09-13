@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <x:Double x:Key="BcButtonSpinnerButtonWidth">17</x:Double>
+  <x:Double x:Key="BcButtonSpinnerButtonMinHeight">11</x:Double>
+
+  <ControlTheme x:Key="BcButtonSpinnerButtonTheme"
+                BasedOn="{StaticResource {x:Type RepeatButton}}"
+                TargetType="RepeatButton">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="{DynamicResource BcButtonSpinnerButtonMinHeight}" />
+    <Setter Property="Width" Value="{DynamicResource BcButtonSpinnerButtonWidth}" />
+    <Setter Property="Focusable" Value="False" />
+    <Style Selector="^ /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ButtonSpinner}"
+                TargetType="ButtonSpinner">
+    <Setter Property="Background" Value="{DynamicResource BcBaseBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcTextBrush}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <DockPanel Margin="{TemplateBinding Padding}"
+                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                     VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <UniformGrid Name="PART_SpinnerPanel"
+                         TabIndex="2"
+                         DockPanel.Dock="Right"
+                         Margin="-1,0,0,0"
+                         IsVisible="{TemplateBinding ShowButtonSpinner}"
+                         Rows="2">
+              <RepeatButton Name="PART_IncreaseButton"
+                            IsTabStop="{TemplateBinding IsTabStop}"
+                            Theme="{StaticResource BcButtonSpinnerButtonTheme}">
+                <Path Width="7"
+                      Height="4"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="{StaticResource BcArrowUpGeometry}"
+                      Fill="{DynamicResource BcButtonIconBrush}" />
+              </RepeatButton>
+              <RepeatButton Name="PART_DecreaseButton"
+                            IsTabStop="{TemplateBinding IsTabStop}"
+                            Theme="{StaticResource BcButtonSpinnerButtonTheme}">
+                <Path Width="7"
+                      Height="4"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="{StaticResource BcArrowDownGeometry}"
+                      Fill="{DynamicResource BcButtonIconBrush}" />
+              </RepeatButton>
+            </UniformGrid>
+            <bc:BevelBorder Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Bevel="Sunken"
+                            LightBrush="Transparent"
+                            DarkBrush="{DynamicResource BcEntryShadowBrush}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                TabIndex="1"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+            </bc:BevelBorder>
+          </DockPanel>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:left">
+      <Style Selector="^ /template/ UniformGrid#PART_SpinnerPanel">
+        <Setter Property="DockPanel.Dock" Value="Left" />
+        <Setter Property="Margin" Value="0,0,-1,0" />
+      </Style>
+    </Style>
+    <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton:pointerover Path">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^ /template/ RepeatButton#PART_DecreaseButton:pointerover Path">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ UniformGrid#PART_SpinnerPanel Path">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:error /template/ bc|BevelBorder#border">
+      <Setter Property="BorderBrush" Value="{DynamicResource BcErrorBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcEntryDisabledTextBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#border">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBaseBrush}" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

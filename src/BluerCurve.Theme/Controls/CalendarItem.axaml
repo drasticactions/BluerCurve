@@ -1,0 +1,137 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Thickness x:Key="BcCalendarHeaderPadding">3</Thickness>
+  <Thickness x:Key="BcCalendarViewMargin">4</Thickness>
+
+  <ControlTheme x:Key="BcCalendarHeaderButtonTheme"
+                BasedOn="{StaticResource {x:Type Button}}"
+                TargetType="Button">
+    <Setter Property="MinHeight" Value="20" />
+    <Setter Property="Padding" Value="4,2" />
+    <Setter Property="Focusable" Value="False" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcCalendarNavButtonTheme"
+                BasedOn="{StaticResource BcCalendarHeaderButtonTheme}"
+                TargetType="Button">
+    <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
+    <Setter Property="MinWidth" Value="20" />
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarItem}"
+                TargetType="CalendarItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Frame"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid RowDefinitions="Auto,*">
+              <Border Grid.Row="0"
+                      Background="{TemplateBinding HeaderBackground}"
+                      BorderBrush="{DynamicResource BcTroughBgBrush}"
+                      BorderThickness="0,0,0,1"
+                      Padding="{DynamicResource BcCalendarHeaderPadding}">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                  <Button Name="PART_PreviousButton"
+                          Grid.Column="0"
+                          Theme="{StaticResource BcCalendarNavButtonTheme}"
+                          Margin="0,0,3,0"
+                          IsVisible="False">
+                    <Path Width="4" Height="7" Data="{StaticResource BcArrowLeftGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+                  </Button>
+
+                  <Button Name="PART_HeaderButton"
+                          Grid.Column="1"
+                          Theme="{StaticResource BcCalendarHeaderButtonTheme}"
+                          HorizontalAlignment="Stretch"
+                          FontWeight="Bold" />
+
+                  <Button Name="PART_NextButton"
+                          Grid.Column="2"
+                          Theme="{StaticResource BcCalendarNavButtonTheme}"
+                          Margin="3,0,0,0"
+                          IsVisible="False">
+                    <Path Width="4" Height="7" Data="{StaticResource BcArrowRightGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+                  </Button>
+                </Grid>
+              </Border>
+
+              <Grid Name="PART_MonthView"
+                    Grid.Row="1"
+                    Margin="{DynamicResource BcCalendarViewMargin}"
+                    IsVisible="False">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+              </Grid>
+
+              <Grid Name="PART_YearView"
+                    Grid.Row="1"
+                    Margin="{DynamicResource BcCalendarViewMargin}"
+                    IsVisible="False">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+              </Grid>
+            </Grid>
+          </Border>
+
+          <Rectangle Name="DisabledVisual"
+                     Fill="Transparent"
+                     IsVisible="False"
+                     IsHitTestVisible="False"
+                     Stretch="Fill" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Setter Property="DayTitleTemplate">
+      <Template x:DataType="x:String">
+        <TextBlock Margin="0,3,0,3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="{DynamicResource FontSizeSmall}"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource BcDarkerBorderBrush}"
+                   Text="{Binding}" />
+      </Template>
+    </Setter>
+
+    <Style Selector="^:calendardisabled /template/ Border#PART_Frame">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBaseBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

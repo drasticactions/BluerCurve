@@ -1,0 +1,144 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    xmlns:converters="using:Avalonia.Controls.Converters"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <StackPanel Spacing="10">
+        <ProgressBar VerticalAlignment="Center" IsIndeterminate="True" />
+        <ProgressBar VerticalAlignment="Center" Value="5" Maximum="10" />
+        <ProgressBar VerticalAlignment="Center" Value="50" />
+        <ProgressBar VerticalAlignment="Center" Value="50" Minimum="25" Maximum="75" />
+        <ProgressBar HorizontalAlignment="Left" IsIndeterminate="True" Orientation="Vertical" />
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <converters:StringFormatConverter x:Key="StringFormatConverter" />
+
+  <ControlTheme x:Key="{x:Type ProgressBar}"
+                TargetType="ProgressBar">
+    <Setter Property="Background" Value="{DynamicResource BcTroughBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource BcProgressGradientBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate TargetType="ProgressBar">
+        <Grid>
+          <bc:BevelBorder Name="PART_Trough"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="None">
+            <Panel ClipToBounds="True">
+              <Border Name="PART_Indicator"
+                      IsVisible="{Binding !IsIndeterminate, RelativeSource={RelativeSource TemplatedParent}}">
+                <bc:BevelBorder Name="PART_IndicatorBevel"
+                                Background="{TemplateBinding Foreground}"
+                                BorderBrush="{DynamicResource BcProgressBorderBrush}"
+                                BorderThickness="1"
+                                Bevel="Raised"
+                                LightBrush="{DynamicResource BcProgressLightBrush}"
+                                DarkBrush="{DynamicResource BcProgressDarkBrush}" />
+              </Border>
+              <Border Name="PART_IndeterminateIndicator"
+                      IsVisible="{Binding IsIndeterminate, RelativeSource={RelativeSource TemplatedParent}}">
+                <bc:BevelBorder Name="PART_IndeterminateBevel"
+                                Background="{TemplateBinding Foreground}"
+                                BorderBrush="{DynamicResource BcProgressBorderBrush}"
+                                BorderThickness="1"
+                                Bevel="Raised"
+                                LightBrush="{DynamicResource BcProgressLightBrush}"
+                                DarkBrush="{DynamicResource BcProgressDarkBrush}" />
+              </Border>
+            </Panel>
+          </bc:BevelBorder>
+          <LayoutTransformControl Name="PART_LayoutTransformControl"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  IsVisible="{Binding ShowProgressText, RelativeSource={RelativeSource TemplatedParent}}">
+            <TextBlock Foreground="{DynamicResource BcFgBrush}">
+              <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource StringFormatConverter}">
+                  <TemplateBinding Property="ProgressTextFormat" />
+                  <Binding Path="Value"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <TemplateBinding Property="Percentage" />
+                  <TemplateBinding Property="Minimum" />
+                  <TemplateBinding Property="Maximum" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+          </LayoutTransformControl>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:horizontal /template/ Border#PART_Indicator">
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="^:vertical /template/ Border#PART_Indicator">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+    <Style Selector="^:horizontal">
+      <Setter Property="MinWidth" Value="150" />
+      <Setter Property="MinHeight" Value="{DynamicResource BcProgressBarThickness}" />
+    </Style>
+    <Style Selector="^:vertical">
+      <Setter Property="MinWidth" Value="{DynamicResource BcProgressBarThickness}" />
+      <Setter Property="MinHeight" Value="150" />
+      <Setter Property="Foreground" Value="{DynamicResource BcProgressGradientHorizontalBrush}" />
+    </Style>
+    <Style Selector="^:vertical /template/ LayoutTransformControl#PART_LayoutTransformControl">
+      <Setter Property="LayoutTransform">
+        <Setter.Value>
+          <RotateTransform Angle="90" />
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:horizontal:indeterminate /template/ Border#PART_IndeterminateIndicator">
+      <Style.Animations>
+        <Animation Easing="LinearEasing"
+                   IterationCount="Infinite"
+                   Duration="0:0:3">
+          <KeyFrame Cue="0%">
+            <Setter Property="TranslateTransform.X" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="TranslateTransform.X" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="Width" Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Style>
+    <Style Selector="^:vertical:indeterminate /template/ Border#PART_IndeterminateIndicator">
+      <Style.Animations>
+        <Animation Easing="LinearEasing"
+                   IterationCount="Infinite"
+                   Duration="0:0:3">
+          <KeyFrame Cue="0%">
+            <Setter Property="TranslateTransform.Y" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateStartingOffset}" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="TranslateTransform.Y" Value="{Binding $parent[ProgressBar].TemplateSettings.IndeterminateEndingOffset}" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Height" Value="{Binding TemplateSettings.ContainerWidth, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Style>
+
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Trough">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

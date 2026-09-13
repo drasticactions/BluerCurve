@@ -1,0 +1,50 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+
+  <Thickness x:Key="BcTableViewRowPadding">0</Thickness>
+
+  <ControlTheme x:Key="{x:Type TableViewRow}" TargetType="TableViewRow">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="{DynamicResource BcTableViewRowPadding}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="Border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+          <TableViewCellsPresenter Name="PART_CellsPresenter" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:disabled /template/ Border#Border">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+
+    <Style Selector="^:pointerover /template/ Border#Border">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+
+    <Style Selector="^:selected">
+
+      <Style Selector="^ /template/ Border#Border">
+        <Setter Property="Background" Value="{DynamicResource BcUnfocusedSelectedBgBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource BcSelectedFgBrush}" />
+      </Style>
+
+      <Style Selector="^:focus /template/ Border#Border">
+        <Setter Property="Background" Value="{DynamicResource BcSelectedBgBrush}" />
+      </Style>
+      <Style Selector="^:focus-within /template/ Border#Border">
+        <Setter Property="Background" Value="{DynamicResource BcSelectedBgBrush}" />
+      </Style>
+
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

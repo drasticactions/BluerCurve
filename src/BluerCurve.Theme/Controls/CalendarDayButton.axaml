@@ -1,0 +1,108 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type CalendarDayButton}"
+                TargetType="CalendarDayButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource BcTextBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="26" />
+    <Setter Property="MinHeight" Value="22" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+
+          <Rectangle Name="Background"
+                     Fill="{DynamicResource BcPrelightBrush}"
+                     IsVisible="False" />
+
+          <Rectangle Name="SelectedBackground"
+                     Fill="{DynamicResource BcSelectedBgBrush}"
+                     IsVisible="False" />
+
+          <Rectangle Name="TodayBackground"
+                     Stroke="{DynamicResource BcDarkerBorderBrush}"
+                     StrokeThickness="1"
+                     Fill="Transparent"
+                     IsHitTestVisible="False"
+                     IsVisible="False" />
+
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Margin="4,1"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}" />
+
+          <Path Name="BlackoutVisual"
+                Margin="3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
+                Fill="{DynamicResource BcInsensitiveFgBrush}"
+                IsVisible="False"
+                RenderTransformOrigin="0.5,0.5"
+                Stretch="Fill" />
+
+          <Rectangle Name="FocusVisual"
+                     Margin="1"
+                     IsHitTestVisible="False"
+                     IsVisible="False"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeDashArray="1,1"
+                     StrokeThickness="1" />
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ Rectangle#Background">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:pressed /template/ Rectangle#Background">
+      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Fill" Value="{DynamicResource BcDarkerBrush}" />
+    </Style>
+
+    <Style Selector="^:selected /template/ Rectangle#SelectedBackground">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource BcSelectedFgBrush}" />
+    </Style>
+    <Style Selector="^:selected /template/ Rectangle#Background">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:disabled /template/ Rectangle#Background">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+
+    <Style Selector="^:dayfocused /template/ Rectangle#FocusVisual">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:today /template/ Rectangle#TodayBackground">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:inactive /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+
+    <Style Selector="^:blackout /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:blackout /template/ Path#BlackoutVisual">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

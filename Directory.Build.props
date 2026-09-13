@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <AvaloniaVersion>12.1.2</AvaloniaVersion>
+    <BluerCurveVersion>0.1.0-alpha1</BluerCurveVersion>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('BluerCurve')) And !$(MSBuildProjectName.EndsWith('.Tests'))">
+    <Authors>drasticactions</Authors>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/drasticactions/BluerCurve</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/drasticactions/BluerCurve</RepositoryUrl>
+    <PackageTags>avalonia theme bluecurve</PackageTags>
+    <Version>$(BluerCurveVersion)</Version>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup Condition="$(MSBuildProjectName.StartsWith('BluerCurve')) And !$(MSBuildProjectName.EndsWith('.Tests'))">
+    <None Include="$(RepoRoot)README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

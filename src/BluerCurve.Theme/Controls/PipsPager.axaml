@@ -1,0 +1,152 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <PipsPager NumberOfPages="5" SelectedPageIndex="2" />
+  </Design.PreviewWith>
+  <StreamGeometry x:Key="BcPipsPagerDotGeometry">M3.5,0 A3.5,3.5 0 1 1 3.5,7 A3.5,3.5 0 1 1 3.5,0 Z</StreamGeometry>
+  <x:Double x:Key="BcPipsPagerDotSize">7</x:Double>
+  <x:Double x:Key="BcPipsPagerButtonSize">20</x:Double>
+
+  <ControlTheme x:Key="BcPipsPagerNavButtonTheme"
+                BasedOn="{StaticResource {x:Type Button}}"
+                TargetType="Button">
+    <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
+    <Setter Property="Width" Value="{DynamicResource BcPipsPagerButtonSize}" />
+    <Setter Property="Height" Value="{DynamicResource BcPipsPagerButtonSize}" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Margin" Value="4" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type PipsPager}" TargetType="PipsPager">
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="PreviousButtonTheme" Value="{StaticResource BcPipsPagerNavButtonTheme}" />
+    <Setter Property="NextButtonTheme" Value="{StaticResource BcPipsPagerNavButtonTheme}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Name="PART_RootPanel"
+                    Orientation="{TemplateBinding Orientation}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    ClipToBounds="False">
+
+            <Button Name="PART_PreviousButton"
+                    Theme="{TemplateBinding PreviousButtonTheme}"
+                    IsVisible="{TemplateBinding IsPreviousButtonVisible}">
+                <Path Name="PreviousArrow" Width="4" Height="7" Data="{StaticResource BcArrowLeftGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+            </Button>
+
+            <ListBox Name="PART_PipsPagerList"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     BorderBrush="Transparent"
+                     Padding="0"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ItemsSource="{Binding TemplateSettings.Pips, RelativeSource={RelativeSource TemplatedParent}}"
+                     SelectedIndex="{Binding SelectedPageIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                     AutoScrollToSelectedItem="False"
+                     ClipToBounds="False">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="{Binding Orientation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=PipsPager}}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Spacing="4" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.Styles>
+                    <Style Selector="ScrollViewer">
+                        <Setter Property="ClipToBounds" Value="False" />
+                    </Style>
+                    <Style Selector="ListBoxItem">
+                         <Setter Property="Width" Value="11" />
+                         <Setter Property="Height" Value="20" />
+                         <Setter Property="Padding" Value="0" />
+                         <Setter Property="Margin" Value="0" />
+                         <Setter Property="MinHeight" Value="0" />
+                         <Setter Property="MinWidth" Value="0" />
+                         <Setter Property="ClipToBounds" Value="False" />
+                         <Setter Property="VerticalAlignment" Value="Center" />
+                         <Setter Property="Template">
+                            <ControlTemplate>
+                                <Panel Background="Transparent">
+                                    <Path Name="Pip"
+                                          Width="{DynamicResource BcPipsPagerDotSize}"
+                                          Height="{DynamicResource BcPipsPagerDotSize}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="{StaticResource BcPipsPagerDotGeometry}"
+                                          Fill="{DynamicResource BcBorderBrush}" />
+                                </Panel>
+                            </ControlTemplate>
+                         </Setter>
+                    </Style>
+                    <Style Selector="ListBoxItem:pointerover /template/ Path#Pip">
+                        <Setter Property="Fill" Value="{DynamicResource BcDarkerBorderBrush}" />
+                    </Style>
+                    <Style Selector="ListBoxItem:pressed /template/ Path#Pip">
+                        <Setter Property="Fill" Value="{DynamicResource BcOutlineBrush}" />
+                    </Style>
+                    <Style Selector="ListBoxItem:selected /template/ Path#Pip">
+                        <Setter Property="Fill" Value="{DynamicResource BcSelectedBgBrush}" />
+                    </Style>
+                    <Style Selector="ListBoxItem:selected:pointerover /template/ Path#Pip">
+                        <Setter Property="Fill" Value="{DynamicResource BcSelectedBgBrush}" />
+                    </Style>
+
+                    <Style Selector="PipsPager:vertical ListBoxItem">
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="11" />
+                    </Style>
+                </ListBox.Styles>
+            </ListBox>
+
+            <Button Name="PART_NextButton"
+                    Theme="{TemplateBinding NextButtonTheme}"
+                    IsVisible="{TemplateBinding IsNextButtonVisible}">
+                <Path Name="NextArrow" Width="4" Height="7" Data="{StaticResource BcArrowRightGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+            </Button>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:vertical /template/ Path#PreviousArrow">
+      <Setter Property="Data" Value="{StaticResource BcArrowUpGeometry}" />
+      <Setter Property="Width" Value="7" />
+      <Setter Property="Height" Value="4" />
+    </Style>
+    <Style Selector="^:vertical /template/ Path#NextArrow">
+      <Setter Property="Data" Value="{StaticResource BcArrowDownGeometry}" />
+      <Setter Property="Width" Value="7" />
+      <Setter Property="Height" Value="4" />
+    </Style>
+
+    <Style Selector="^:first-page /template/ Button#PART_PreviousButton">
+      <Setter Property="Opacity" Value="0" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:last-page /template/ Button#PART_NextButton">
+      <Setter Property="Opacity" Value="0" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,94 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type DropDownButton}"
+                TargetType="DropDownButton">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="{DynamicResource BcButtonPadding}" />
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <bc:BevelBorder Name="RootBorder"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <Panel>
+              <Grid Name="InnerGrid" ColumnDefinitions="*,Auto,Auto">
+                <ContentPresenter Name="PART_ContentPresenter"
+                                  Grid.Column="0"
+                                  Padding="{TemplateBinding Padding}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  RecognizesAccessKey="True"
+                                  TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                <Rectangle Name="SeparatorLine"
+                           Grid.Column="1"
+                           Width="1"
+                           Fill="{DynamicResource BcMediumBorderBrush}"
+                           IsHitTestVisible="False" />
+
+                <Path Name="DropDownGlyph"
+                      Grid.Column="2"
+                      Width="7"
+                      Height="4"
+                      Margin="4,0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="{StaticResource BcArrowDownGeometry}"
+                      Fill="{DynamicResource BcButtonIconBrush}"
+                      IsHitTestVisible="False" />
+              </Grid>
+              <Rectangle Name="PART_FocusRect"
+                         Margin="2"
+                         Stroke="{DynamicResource BcOutlineBrush}"
+                         StrokeThickness="1"
+                         StrokeDashArray="1,1"
+                         IsVisible="False"
+                         IsHitTestVisible="False" />
+            </Panel>
+          </bc:BevelBorder>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#RootBorder">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ Path#DropDownGlyph">
+      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#RootBorder">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:flyout-open /template/ bc|BevelBorder#RootBorder">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#RootBorder">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Path#DropDownGlyph">
+      <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,84 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <x:Double x:Key="BcCalendarDatePickerButtonWidth">18</x:Double>
+
+  <ControlTheme x:Key="BcCalendarDatePickerButtonTheme"
+                BasedOn="{StaticResource {x:Type Button}}"
+                TargetType="Button">
+    <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
+    <Setter Property="Width" Value="{DynamicResource BcCalendarDatePickerButtonWidth}" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Margin" Value="-1,0,0,0" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Content">
+      <Template>
+        <Path Width="7" Height="4" Data="{StaticResource BcArrowDownGeometry}" Fill="{Binding $parent[Button].Foreground}" />
+      </Template>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarDatePicker}"
+                TargetType="CalendarDatePicker">
+    <Setter Property="Background" Value="{DynamicResource BcBaseBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcTextBrush}" />
+    <Setter Property="PlaceholderForeground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="{DynamicResource BcEntryPadding}" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="*,Auto">
+
+          <TextBox Name="PART_TextBox"
+                   Grid.Column="0"
+                   Padding="{TemplateBinding Padding}"
+                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                   Background="{TemplateBinding Background}"
+                   BorderBrush="{TemplateBinding BorderBrush}"
+                   BorderThickness="{TemplateBinding BorderThickness}"
+                   Foreground="{TemplateBinding Foreground}"
+                   DataValidationErrors.Errors="{TemplateBinding (DataValidationErrors.Errors)}"
+                   UseFloatingPlaceholder="{TemplateBinding UseFloatingPlaceholder}"
+                   PlaceholderText="{TemplateBinding PlaceholderText}"
+                   PlaceholderForeground="{TemplateBinding PlaceholderForeground}" />
+
+          <Button Name="PART_Button"
+                  Grid.Column="1"
+                  Theme="{StaticResource BcCalendarDatePickerButtonTheme}"
+                  VerticalAlignment="Stretch"
+                  ClipToBounds="False" />
+
+          <Popup Name="PART_Popup"
+                 PlacementTarget="{TemplateBinding}"
+                 IsLightDismissEnabled="True">
+            <Calendar Name="PART_Calendar"
+                      DisplayDate="{TemplateBinding DisplayDate}"
+                      DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                      DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                      FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
+                      IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
+                      SelectedDate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedDate,
+                                                     Mode=TwoWay}" />
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBaseBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcEntryDisabledTextBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

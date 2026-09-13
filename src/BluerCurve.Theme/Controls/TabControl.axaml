@@ -1,0 +1,62 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type TabControl}"
+                TargetType="TabControl">
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                   VerticalAlignment="{TemplateBinding VerticalAlignment}">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ZIndex="1"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+          <bc:BevelBorder Name="PART_Frame"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}"
+                          Padding="{TemplateBinding Padding}">
+            <Panel ClipToBounds="True">
+              <ContentPresenter Name="PART_SelectedContentHost2"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                IsVisible="False" />
+              <ContentPresenter Name="PART_SelectedContentHost"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Panel>
+          </bc:BevelBorder>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Top" />
+      <Setter Property="Margin" Value="0,1,0,-1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Bottom" />
+      <Setter Property="Margin" Value="0,-1,0,1" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Left" />
+      <Setter Property="Margin" Value="1,1,-1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+      <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Right" />
+      <Setter Property="Margin" Value="-1,1,1,0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+      <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

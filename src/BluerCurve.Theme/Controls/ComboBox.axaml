@@ -1,0 +1,219 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Thickness x:Key="BcComboBoxPadding">3</Thickness>
+  <Thickness x:Key="BcComboBoxPopupPadding">4,3</Thickness>
+  <ControlTheme x:Key="BcComboBoxToggleTheme" TargetType="ToggleButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Cell"
+                Width="17"
+                Margin="0,0,1,0"
+                BorderBrush="{DynamicResource BcMediumBorderBrush}"
+                BorderThickness="1,0,0,0"
+                Background="{TemplateBinding Background}">
+          <Path Name="PART_Arrow"
+                Width="7"
+                Height="4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="{StaticResource BcArrowDownGeometry}"
+                Fill="{TemplateBinding Foreground}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcComboBoxEditableToggleTheme" TargetType="ToggleButton">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_Bevel"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <Path Name="PART_Arrow"
+                Width="7"
+                Height="4"
+                Margin="4,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="{StaticResource BcArrowDownGeometry}"
+                Fill="{TemplateBinding Foreground}" />
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel, ^:checked /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ComboBox}"
+                TargetType="ComboBox">
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="{DynamicResource BcComboBoxPadding}" />
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="PlaceholderForeground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <bc:BevelBorder Name="PART_Bevel"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Bevel="Raised"
+                          LightBrush="{DynamicResource BcBevelLightBrush}"
+                          DarkBrush="{DynamicResource BcBevelDarkBrush}">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Name="PlaceholderTextBlock"
+                         Grid.Column="0"
+                         Margin="{TemplateBinding Padding}"
+                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                         Foreground="{TemplateBinding PlaceholderForeground}"
+                         Text="{TemplateBinding PlaceholderText}">
+                <TextBlock.IsVisible>
+                  <MultiBinding Converter="{x:Static BoolConverters.And}">
+                    <Binding Path="SelectionBoxItem" RelativeSource="{RelativeSource TemplatedParent}" Converter="{x:Static ObjectConverters.IsNull}" />
+                    <Binding Path="!IsEditable" RelativeSource="{RelativeSource TemplatedParent}" />
+                  </MultiBinding>
+                </TextBlock.IsVisible>
+              </TextBlock>
+              <ContentControl Name="PART_SelectionBox"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Content="{TemplateBinding SelectionBoxItem}"
+                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                              Foreground="{TemplateBinding Foreground}"
+                              IsVisible="{TemplateBinding IsEditable, Converter={x:Static BoolConverters.Not}}">
+              </ContentControl>
+              <TextBox Name="PART_EditableTextBox"
+                       Grid.Column="0"
+                       Padding="{TemplateBinding Padding}"
+                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                       Foreground="{TemplateBinding Foreground}"
+                       Text="{TemplateBinding Text, Mode=TwoWay}"
+                       PlaceholderText="{TemplateBinding PlaceholderText}"
+                       IsVisible="{TemplateBinding IsEditable}" />
+              <ToggleButton Name="toggle"
+                            Grid.Column="1"
+                            Theme="{StaticResource BcComboBoxToggleTheme}"
+                            ClickMode="Press"
+                            Focusable="False"
+                            IsVisible="{TemplateBinding IsEditable, Converter={x:Static BoolConverters.Not}}"
+                            IsChecked="{TemplateBinding IsDropDownOpen,
+                                                        Mode=TwoWay}" />
+              <ToggleButton Name="editableToggle"
+                            Grid.Column="1"
+                            Margin="-1,0,0,0"
+                            Theme="{StaticResource BcComboBoxEditableToggleTheme}"
+                            ClickMode="Press"
+                            Focusable="False"
+                            IsVisible="{TemplateBinding IsEditable}"
+                            IsChecked="{TemplateBinding IsDropDownOpen,
+                                                        Mode=TwoWay}" />
+              <Popup Name="PART_Popup"
+                     MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                     MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                     IsLightDismissEnabled="True"
+                     IsOpen="{TemplateBinding IsDropDownOpen,
+                                              Mode=TwoWay}"
+                     PlacementTarget="{TemplateBinding}"
+                     InheritsTransform="True">
+                <bc:BevelBorder Background="{DynamicResource BcBgBrush}"
+                                BorderBrush="{DynamicResource BcBorderBrush}"
+                                BorderThickness="1"
+                                Bevel="Raised"
+                                LightBrush="{DynamicResource BcBevelLightBrush}"
+                                DarkBrush="{DynamicResource BcBevelDarkBrush}"
+                                Padding="{StaticResource BcComboBoxPopupPadding}">
+                  <ScrollViewer HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}"
+                                ScrollViewer.IsScrollChainingEnabled="False">
+                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                  </ScrollViewer>
+                </bc:BevelBorder>
+              </Popup>
+            </Grid>
+          </bc:BevelBorder>
+          <Rectangle Name="PART_FocusRect"
+                     Margin="2"
+                     Stroke="{DynamicResource BcOutlineBrush}"
+                     StrokeThickness="1"
+                     StrokeDashArray="1,1"
+                     IsVisible="False"
+                     IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ ToggleButton#toggle">
+      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel, ^[IsDropDownOpen=True] /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+      <Setter Property="Bevel" Value="Sunken" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ ToggleButton#toggle">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+
+    <Style Selector="^[IsEditable=True]">
+      <Setter Property="IsTabStop" Value="False" />
+      <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
+    </Style>
+    <Style Selector="^[IsEditable=True] /template/ bc|BevelBorder#PART_Bevel">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Bevel" Value="None" />
+    </Style>
+    <Style Selector="^[IsEditable=True] /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

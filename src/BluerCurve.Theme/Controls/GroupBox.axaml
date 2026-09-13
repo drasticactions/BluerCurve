@@ -1,0 +1,79 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
+                    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <GroupBox Padding="10" Margin="10" Header="Frame">
+      <TextBlock Text="Hello World" />
+    </GroupBox>
+  </Design.PreviewWith>
+  <converters:BorderGapMaskConverter x:Key="BcGroupBoxBorderGapMaskConverter" />
+
+  <ControlTheme x:Key="{x:Type GroupBox}"
+                TargetType="GroupBox">
+    <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="CornerRadius" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid x:Name="RootGrid" UseLayoutRounding="true" ColumnDefinitions="6,Auto,*,6" RowDefinitions="Auto,Auto,*,6">
+          <Border Grid.Row="1"
+                  Grid.RowSpan="3"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="4"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  BorderBrush="Transparent"
+                  Background="{TemplateBinding Background}"/>
+
+          <Border Grid.Row="1"
+                  Grid.RowSpan="3"
+                  Grid.ColumnSpan="4"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  BorderBrush="{TemplateBinding BorderBrush}">
+            <Border.OpacityMask>
+              <MultiBinding Converter="{StaticResource BcGroupBoxBorderGapMaskConverter}"
+                            ConverterParameter="6">
+                <Binding ElementName="Header"
+                         Path="Bounds.Width"/>
+                <Binding RelativeSource="{RelativeSource Self}"
+                         Path="Bounds.Width"/>
+                <Binding RelativeSource="{RelativeSource Self}"
+                         Path="Bounds.Height"/>
+              </MultiBinding>
+            </Border.OpacityMask>
+          </Border>
+
+          <Border x:Name="Header"
+                  Padding="5,0"
+                  Grid.Row="0"
+                  Grid.RowSpan="2"
+                  Grid.Column="1">
+            <ContentPresenter Name="PART_HeaderPresenter"
+                              Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              TextElement.Foreground="{DynamicResource BcDarkerBorderBrush}"
+                              RecognizesAccessKey="True"
+                              UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
+          </Border>
+          <ContentPresenter Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Name="PART_ContentPresenter"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Content="{TemplateBinding Content}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                            Margin="{TemplateBinding Padding}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_HeaderPresenter">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,14 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BluerCurve.BluerCurveTheme">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <MergeResourceInclude Source="avares://BluerCurve.Theme/Accents/Base.axaml" />
+        <MergeResourceInclude Source="avares://BluerCurve.Theme/Accents/Glyphs.axaml" />
+        <MergeResourceInclude Source="avares://BluerCurve.Theme/Strings/InvariantResources.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+  <StyleInclude Source="avares://BluerCurve.Theme/Controls/Controls.axaml" />
+</Styles>

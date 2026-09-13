@@ -1,0 +1,140 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:chrome="clr-namespace:BluerCurve.Chrome"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="BluerCurveWindow" TargetType="Window">
+    <Setter Property="FontFamily" Value="{DynamicResource BcFontFamily}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="Background" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="TransparencyLevelHint" Value="Transparent" />
+    <Setter Property="MinWidth" Value="120" />
+    <Setter Property="MinHeight" Value="60" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <chrome:WindowChromeHost Name="PART_ChromeHost">
+         <Border Name="PART_Clip" ClipToBounds="True" CornerRadius="{DynamicResource BcFrameCornerRadius}">
+          <Panel>
+          <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
+          <Border Name="PART_Frame"
+                  Background="{DynamicResource BcBgBrush}"
+                  BorderBrush="{DynamicResource BcFrameOutlineBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{DynamicResource BcFrameCornerRadius}"
+                  IsHitTestVisible="False" />
+          <VisualLayerManager Name="PART_VisualLayerManager">
+          <DockPanel Name="PART_Layout" Margin="1,1,1,1">
+            <Panel Name="PART_TitleBar"
+                   DockPanel.Dock="Top"
+                   Height="21"
+                   Background="Transparent"
+                   WindowDecorationProperties.ElementRole="TitleBar">
+              <chrome:TitleBarBackground Name="PART_TitleBackground" Margin="0,0,0,1" />
+              <Panel Name="PART_TitleTextPanel" Margin="30,0,82,1" IsHitTestVisible="False">
+                <TextBlock Name="PART_TitleShadow"
+                           Theme="{StaticResource BcTitleTextBlock}"
+                           Text="{TemplateBinding Title}"
+                           Foreground="{DynamicResource BcTitleTextShadowBrush}"
+                           Margin="1,1,-1,-1" />
+                <TextBlock Name="PART_TitleText"
+                           Theme="{StaticResource BcTitleTextBlock}"
+                           Text="{TemplateBinding Title}" />
+              </Panel>
+              <chrome:TitleBarPod Name="PART_LeftPod" Classes="left" HorizontalAlignment="Left" Margin="0,0,0,1">
+                <chrome:WindowMenuButton Name="PART_MenuButton" />
+              </chrome:TitleBarPod>
+              <chrome:TitleBarPod Name="PART_RightPod" Classes="right" HorizontalAlignment="Right" Margin="0,0,0,1">
+                <StackPanel Name="PART_CaptionButtons" Orientation="Horizontal" Spacing="4">
+                  <chrome:CaptionButton Name="PART_MinimizeButton" Action="Minimize"
+                                        Glyph="{StaticResource BcCaptionMinimizeGeometry}"
+                                        IsVisible="{TemplateBinding CanMinimize}"
+                                        WindowDecorationProperties.ElementRole="MinimizeButton" />
+                  <chrome:CaptionButton Name="PART_MaximizeButton" Action="Maximize" Classes="maximize"
+                                        Glyph="{StaticResource BcCaptionMaximizeGeometry}"
+                                        IsVisible="{TemplateBinding CanMaximize}"
+                                        WindowDecorationProperties.ElementRole="MaximizeButton" />
+                  <chrome:CaptionButton Name="PART_CloseButton" Action="Close"
+                                        StrokeGlyph="{StaticResource BcCaptionCloseStrokeGeometry}"
+                                        WindowDecorationProperties.ElementRole="CloseButton" />
+                </StackPanel>
+              </chrome:TitleBarPod>
+            </Panel>
+            <Border Name="PART_ClientBorder"
+                    Margin="3,0,3,3"
+                    BorderBrush="{DynamicResource BcFrameOutlineBrush}"
+                    BorderThickness="1"
+                    Background="{TemplateBinding Background}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Border>
+          </DockPanel>
+          </VisualLayerManager>
+          <Panel Name="PART_ResizeGrips" IsVisible="{TemplateBinding CanResize}">
+            <Border Classes="bc-resize" Tag="N" Height="4" VerticalAlignment="Top" Margin="12,0" Cursor="SizeNorthSouth" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeN" />
+            <Border Classes="bc-resize" Tag="S" Height="5" VerticalAlignment="Bottom" Margin="12,0" Cursor="SizeNorthSouth" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeS" />
+            <Border Classes="bc-resize" Tag="W" Width="5" HorizontalAlignment="Left" Margin="0,12" Cursor="SizeWestEast" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeW" />
+            <Border Classes="bc-resize" Tag="E" Width="5" HorizontalAlignment="Right" Margin="0,12" Cursor="SizeWestEast" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeE" />
+            <Border Classes="bc-resize" Tag="NW" Width="12" Height="12" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="TopLeftCorner" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeNW" />
+            <Border Classes="bc-resize" Tag="NE" Width="12" Height="12" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="TopRightCorner" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeNE" />
+            <Border Classes="bc-resize" Tag="SW" Width="12" Height="12" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="BottomLeftCorner" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeSW" />
+            <Border Classes="bc-resize" Tag="SE" Width="12" Height="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="BottomRightCorner" Background="Transparent" WindowDecorationProperties.ElementRole="ResizeSE" />
+          </Panel>
+          </Panel>
+         </Border>
+        </chrome:WindowChromeHost>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ chrome|WindowChromeHost:inactive TextBlock#PART_TitleShadow">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^ /template/ chrome|WindowChromeHost:inactive TextBlock#PART_TitleText">
+      <Setter Property="Foreground" Value="{DynamicResource BcTitleTextInactiveBrush}" />
+    </Style>
+
+    <Style Selector="^[WindowState=Maximized] /template/ Border#PART_Clip">
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ Border#PART_Clip">
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=Maximized] /template/ Border#PART_Frame">
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=Maximized] /template/ DockPanel#PART_Layout">
+      <Setter Property="Margin" Value="{Binding $parent[Window].OffScreenMargin}" />
+    </Style>
+    <Style Selector="^[WindowState=Maximized] /template/ Border#PART_ClientBorder">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=Maximized] /template/ Panel#PART_ResizeGrips">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ Panel#PART_TitleBar">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ Border#PART_Frame">
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ DockPanel#PART_Layout">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ Border#PART_ClientBorder">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="^[WindowState=FullScreen] /template/ Panel#PART_ResizeGrips">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type chrome:BluerCurveWindow}" TargetType="chrome:BluerCurveWindow" BasedOn="{StaticResource BluerCurveWindow}" />
+</ResourceDictionary>

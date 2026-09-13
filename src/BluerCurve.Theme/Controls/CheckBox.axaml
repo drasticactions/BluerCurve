@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+  <Thickness x:Key="BcCheckBoxPadding">3,1,2,1</Thickness>
+
+  <ControlTheme x:Key="{x:Type CheckBox}"
+                TargetType="CheckBox">
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcDarkerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Padding" Value="{DynamicResource BcCheckBoxPadding}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Row"
+                Background="{TemplateBinding Background}">
+          <Grid ColumnDefinitions="Auto,*">
+            <Panel Width="16"
+                   Height="16"
+                   VerticalAlignment="Center">
+              <Panel Name="indicator"
+                     Width="13"
+                     Height="13"
+                     Margin="1,1,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top">
+                <Border Name="box"
+                        Background="{DynamicResource BcWhiteBrush}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" />
+                <Path Name="checkMark"
+                      Width="13"
+                      Height="13"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Data="{StaticResource BcCheckGeometry}"
+                      Fill="{DynamicResource BcCheckBrush}"
+                      FlowDirection="LeftToRight" />
+                <Path Name="indeterminateMark"
+                      Width="13"
+                      Height="13"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Data="{StaticResource BcCheckIndeterminateGeometry}"
+                      Fill="{DynamicResource BcCheckBrush}" />
+              </Panel>
+            </Panel>
+            <Panel Grid.Column="1"
+                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                   IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+              <Rectangle Name="PART_FocusRect"
+                         Margin="1,0,0,0"
+                         Stroke="{DynamicResource BcOutlineBrush}"
+                         StrokeThickness="1"
+                         StrokeDashArray="1,1"
+                         IsVisible="False"
+                         IsHitTestVisible="False" />
+            </Panel>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="RecognizesAccessKey" Value="True" />
+    </Style>
+
+    <Style Selector="^:pointerover /template/ Border#PART_Row">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ Border#box">
+      <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^ /template/ Path#checkMark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^ /template/ Path#indeterminateMark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked /template/ Path#checkMark">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:indeterminate /template/ Path#indeterminateMark">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ Border#box">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBaseBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

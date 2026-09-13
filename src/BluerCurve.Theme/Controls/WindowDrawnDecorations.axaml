@@ -1,0 +1,169 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:chrome="clr-namespace:BluerCurve.Chrome"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type WindowDrawnDecorations}" TargetType="WindowDrawnDecorations">
+    <Setter Property="DefaultTitleBarHeight" Value="22" />
+    <Setter Property="DefaultFrameThickness" Value="5,0,5,5" />
+    <Setter Property="DefaultShadowThickness" Value="0" />
+    <Setter Property="Template">
+      <WindowDrawnDecorationsTemplate>
+        <WindowDrawnDecorationsContent>
+
+          <WindowDrawnDecorationsContent.Underlay>
+            <chrome:WindowChromeHost x:Name="PART_UnderlayWrapper">
+             <Border x:Name="PART_UnderlayClip" ClipToBounds="True" CornerRadius="{DynamicResource BcFrameCornerRadius}">
+             <Panel>
+              <Border x:Name="PART_WindowBorder"
+                      Background="{DynamicResource BcBgBrush}"
+                      BorderBrush="{DynamicResource BcFrameOutlineBrush}"
+                      BorderThickness="1"
+                      CornerRadius="{DynamicResource BcFrameCornerRadius}"
+                      IsHitTestVisible="False" />
+              <Panel x:Name="PART_TitleBar"
+                     VerticalAlignment="Top"
+                     Margin="1,1,1,0"
+                     Height="{TemplateBinding TitleBarHeight}"
+                     IsVisible="{TemplateBinding HasTitleBar}"
+                     WindowDecorationProperties.ElementRole="TitleBar">
+                <chrome:TitleBarBackground x:Name="PART_TitleBackground" Margin="0,0,0,1" />
+              </Panel>
+              <Border x:Name="PART_ClientOutline"
+                      BorderBrush="{DynamicResource BcFrameOutlineBrush}"
+                      BorderThickness="1"
+                      Margin="4,21,4,4"
+                      IsHitTestVisible="False" />
+             </Panel>
+             </Border>
+            </chrome:WindowChromeHost>
+          </WindowDrawnDecorationsContent.Underlay>
+
+          <WindowDrawnDecorationsContent.Overlay>
+            <chrome:WindowChromeHost x:Name="PART_OverlayWrapper">
+              <Panel x:Name="PART_TitlePanel"
+                     VerticalAlignment="Top"
+                     Margin="1,1,1,0"
+                     Height="{TemplateBinding TitleBarHeight}"
+                     IsVisible="{TemplateBinding HasTitleBar}">
+                <Panel x:Name="PART_TitleTextPanel" Margin="30,0,82,1" IsHitTestVisible="False">
+                  <TextBlock x:Name="PART_TitleShadow"
+                             Theme="{StaticResource BcTitleTextBlock}"
+                             Text="{TemplateBinding Title}"
+                             Foreground="{DynamicResource BcTitleTextShadowBrush}"
+                             Margin="1,1,-1,-1" />
+                  <TextBlock x:Name="PART_TitleText"
+                             Theme="{StaticResource BcTitleTextBlock}"
+                             Text="{TemplateBinding Title}" />
+                </Panel>
+                <chrome:TitleBarPod x:Name="PART_LeftPod" Classes="left" HorizontalAlignment="Left" Margin="0,0,0,1">
+                  <chrome:WindowMenuButton x:Name="PART_MenuButton" AutomationProperties.Name="Window menu" />
+                </chrome:TitleBarPod>
+                <chrome:TitleBarPod x:Name="PART_RightPod" Classes="right" HorizontalAlignment="Right" Margin="0,0,0,1">
+                  <StackPanel x:Name="PART_CaptionButtons" Orientation="Horizontal" Spacing="4">
+                    <chrome:CaptionButton x:Name="PART_MinimizeButton"
+                                          Glyph="{StaticResource BcCaptionMinimizeGeometry}"
+                                          WindowDecorationProperties.ElementRole="MinimizeButton"
+                                          AutomationProperties.Name="Minimize" />
+                    <chrome:CaptionButton x:Name="PART_MaximizeButton"
+                                          Classes="maximize"
+                                          Glyph="{StaticResource BcCaptionMaximizeGeometry}"
+                                          WindowDecorationProperties.ElementRole="MaximizeButton"
+                                          AutomationProperties.Name="Maximize" />
+                    <chrome:CaptionButton x:Name="PART_FullScreenButton"
+                                          IsVisible="False"
+                                          Glyph="{StaticResource BcCaptionMaximizeGeometry}"
+                                          WindowDecorationProperties.ElementRole="FullScreenButton"
+                                          AutomationProperties.Name="Full screen" />
+                    <chrome:CaptionButton x:Name="PART_CloseButton"
+                                          StrokeGlyph="{StaticResource BcCaptionCloseStrokeGeometry}"
+                                          WindowDecorationProperties.ElementRole="CloseButton"
+                                          AutomationProperties.Name="Close" />
+                  </StackPanel>
+                </chrome:TitleBarPod>
+              </Panel>
+            </chrome:WindowChromeHost>
+          </WindowDrawnDecorationsContent.Overlay>
+
+          <WindowDrawnDecorationsContent.FullscreenPopover>
+            <chrome:WindowChromeHost Height="22" VerticalAlignment="Top" WindowDecorationProperties.ElementRole="TitleBar">
+              <chrome:TitleBarBackground />
+              <Panel Margin="24,0,46,1" IsHitTestVisible="False">
+                <TextBlock Theme="{StaticResource BcTitleTextBlock}" Text="{TemplateBinding Title}"
+                           Foreground="{DynamicResource BcTitleTextShadowBrush}" Margin="1,1,-1,-1" />
+                <TextBlock Theme="{StaticResource BcTitleTextBlock}" Text="{TemplateBinding Title}" />
+              </Panel>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0" Spacing="4">
+                <chrome:CaptionButton x:Name="PART_PopoverFullScreenButton"
+                                      Glyph="{StaticResource BcCaptionRestoreGeometry}"
+                                      WindowDecorationProperties.ElementRole="FullScreenButton"
+                                      AutomationProperties.Name="Exit full screen" />
+                <chrome:CaptionButton x:Name="PART_PopoverCloseButton"
+                                      StrokeGlyph="{StaticResource BcCaptionCloseStrokeGeometry}"
+                                      WindowDecorationProperties.ElementRole="CloseButton"
+                                      AutomationProperties.Name="Close" />
+              </StackPanel>
+            </chrome:WindowChromeHost>
+          </WindowDrawnDecorationsContent.FullscreenPopover>
+
+        </WindowDrawnDecorationsContent>
+      </WindowDrawnDecorationsTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ chrome|WindowChromeHost:inactive TextBlock#PART_TitleShadow">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^ /template/ chrome|WindowChromeHost:inactive TextBlock#PART_TitleText">
+      <Setter Property="Foreground" Value="{DynamicResource BcTitleTextInactiveBrush}" />
+    </Style>
+
+    <Style Selector="^:not(:has-border) /template/ Border#PART_UnderlayClip">
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="^:maximized /template/ Border#PART_UnderlayClip">
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="^:not(:has-border) /template/ Border#PART_WindowBorder">
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="^:not(:has-border) /template/ Border#PART_ClientOutline">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:not(:has-border) /template/ Panel#PART_TitleBar">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^:not(:has-border) /template/ Panel#PART_TitlePanel">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^:maximized /template/ Border#PART_WindowBorder">
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <Style Selector="^:has-shadow /template/ chrome|WindowChromeHost#PART_UnderlayWrapper">
+      <Setter Property="Margin" Value="{TemplateBinding ShadowThickness}" />
+    </Style>
+    <Style Selector="^:has-shadow /template/ chrome|WindowChromeHost#PART_OverlayWrapper">
+      <Setter Property="Margin" Value="{TemplateBinding ShadowThickness}" />
+    </Style>
+    <Style Selector="^:has-shadow /template/ Border#PART_WindowBorder">
+      <Setter Property="BoxShadow" Value="0 2 8 0 #60000000" />
+    </Style>
+
+    <Style Selector="^:not(:has-minimize) /template/ chrome|CaptionButton#PART_MinimizeButton">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:not(:has-maximize) /template/ chrome|CaptionButton#PART_MaximizeButton">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:not(:has-fullscreen) /template/ chrome|CaptionButton#PART_PopoverFullScreenButton">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style Selector="^:fullscreen /template/ Panel#PART_TitlePanel">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:fullscreen /template/ Panel#PART_TitleBar">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

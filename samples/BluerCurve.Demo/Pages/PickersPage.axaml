@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BluerCurve.Demo.PickersPage">
+  <ScrollViewer>
+    <WrapPanel Margin="8">
+      <StackPanel Spacing="8" Margin="4" Width="260">
+        <Calendar />
+        <CalendarDatePicker />
+        <DatePicker />
+        <TimePicker />
+      </StackPanel>
+      <StackPanel Spacing="8" Margin="4" Width="320">
+        <ColorPicker Color="#4464ac" HorizontalAlignment="Left" />
+        <ColorView Color="#4464ac" />
+      </StackPanel>
+    </WrapPanel>
+  </ScrollViewer>
+</UserControl>

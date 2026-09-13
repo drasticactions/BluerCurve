@@ -1,0 +1,124 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BluerCurve.Demo.WidgetFactoryPage">
+  <ScrollViewer>
+    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" Margin="4">
+      <StackPanel Grid.Column="0" Spacing="6" Margin="4">
+        <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
+          <ComboBoxItem>Combo box entry 1</ComboBoxItem>
+          <ComboBoxItem>Combo box entry 2</ComboBoxItem>
+        </ComboBox>
+        <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" IsEnabled="False">
+          <ComboBoxItem>Combo box entry 1</ComboBoxItem>
+        </ComboBox>
+        <AutoCompleteBox PlaceholderText="Auto complete" HorizontalAlignment="Stretch" />
+        <TextBox Text="Entry" />
+        <TextBox PlaceholderText="Entry" IsEnabled="False" />
+        <TextBox Text="Password" PasswordChar="*" />
+        <NumericUpDown Value="1" Minimum="0" Maximum="10" />
+        <NumericUpDown Value="1" IsEnabled="False" />
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+          <CheckBox Grid.Row="0" Content="Check btn 1" />
+          <RadioButton Grid.Row="0" Grid.Column="1" Content="Radio btn 1" GroupName="a" />
+          <CheckBox Grid.Row="1" Content="Check btn 2" IsChecked="True" />
+          <RadioButton Grid.Row="1" Grid.Column="1" Content="Radio btn 2" GroupName="a" IsChecked="True" />
+          <CheckBox Grid.Row="2" Content="Check btn 3" IsThreeState="True" IsChecked="{x:Null}" />
+          <RadioButton Grid.Row="2" Grid.Column="1" Content="Radio btn 3" GroupName="a" />
+          <CheckBox Grid.Row="3" Content="Check btn 4" IsEnabled="False" />
+          <RadioButton Grid.Row="3" Grid.Column="1" Content="Radio btn 4" GroupName="b" IsEnabled="False" />
+          <CheckBox Grid.Row="4" Content="Check btn 5" IsEnabled="False" IsChecked="True" />
+          <RadioButton Grid.Row="4" Grid.Column="1" Content="Radio btn 5" GroupName="b" IsEnabled="False" IsChecked="True" />
+          <CheckBox Grid.Row="5" Content="Check btn 6" IsEnabled="False" IsThreeState="True" IsChecked="{x:Null}" />
+          <RadioButton Grid.Row="5" Grid.Column="1" Content="Radio btn 6" GroupName="c" IsEnabled="False" />
+        </Grid>
+        <HyperlinkButton Content="Link button" />
+        <HyperlinkButton Content="Link button" IsEnabled="False" />
+        <ToggleSwitch OnContent="On" OffContent="Off" IsChecked="True" />
+        <ToggleSwitch OnContent="On" OffContent="Off" IsEnabled="False" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="1" Spacing="6" Margin="4">
+        <Button Content="Button 1" HorizontalAlignment="Stretch" />
+        <Button Content="Button 2" HorizontalAlignment="Stretch" IsEnabled="False" />
+        <ToggleButton Content="Button 3" HorizontalAlignment="Stretch" IsChecked="True" />
+        <ToggleButton Content="Button 4" HorizontalAlignment="Stretch" IsEnabled="False" />
+        <Button Content="Default button" IsDefault="True" HorizontalAlignment="Stretch" />
+        <DropDownButton Content="Drop down" HorizontalAlignment="Stretch">
+          <DropDownButton.Flyout>
+            <MenuFlyout>
+              <MenuItem Header="Item 1" />
+              <MenuItem Header="Item 2" />
+            </MenuFlyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+        <SplitButton Content="Split button" HorizontalAlignment="Stretch">
+          <SplitButton.Flyout>
+            <MenuFlyout>
+              <MenuItem Header="Item 1" />
+            </MenuFlyout>
+          </SplitButton.Flyout>
+        </SplitButton>
+        <RepeatButton Content="Repeat button" HorizontalAlignment="Stretch" />
+        <Separator />
+        <ProgressBar Value="40" />
+        <ProgressBar Value="60" IsEnabled="False" />
+        <ProgressBar IsIndeterminate="True" />
+        <Slider Value="40" />
+        <Slider Value="60" IsEnabled="False" />
+        <Slider Value="30" TickFrequency="10" TickPlacement="BottomRight" />
+        <StackPanel Orientation="Horizontal" Spacing="12" Height="120">
+          <ProgressBar Orientation="Vertical" Value="40" />
+          <ProgressBar Orientation="Vertical" Value="70" IsEnabled="False" />
+          <Slider Orientation="Vertical" Value="40" />
+          <Slider Orientation="Vertical" Value="60" IsEnabled="False" />
+          <ScrollBar Orientation="Vertical" Maximum="100" ViewportSize="30" Value="20" AllowAutoHide="False" />
+        </StackPanel>
+        <ScrollBar Orientation="Horizontal" Maximum="100" ViewportSize="30" Value="20" AllowAutoHide="False" />
+        <Expander Header="More...">
+          <TextBlock TextWrapping="Wrap" Text="A widget factory is a theme preview application for GTK. It displays the various widget types provided by GTK in a single window allowing to see the visual effect of the applied theme." />
+        </Expander>
+      </StackPanel>
+
+      <StackPanel Grid.Column="2" Spacing="6" Margin="4">
+        <GroupBox Header="Frame">
+          <TextBlock Text="Frame content" Margin="4" />
+        </GroupBox>
+        <HeaderedContentControl Header="Headered content">
+          <TextBlock Text="Content" Margin="4" />
+        </HeaderedContentControl>
+        <Label Content="Label 1" />
+        <Label Content="Label 2" IsEnabled="False" />
+        <TextBlock Text="Selectable text block" />
+        <SelectableTextBlock Text="Select me" />
+        <Border Height="100" Background="{DynamicResource BcBaseBrush}" BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1">
+          <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <TextBlock Width="400" Height="200" Margin="2" TextWrapping="Wrap" Text="A widget factory is a theme preview application for GTK. It displays the various widget types provided by GTK in a single window allowing to see the visual effect of the applied theme." />
+          </ScrollViewer>
+        </Border>
+        <Button Content="Show tooltip" ToolTip.Tip="This is a tooltip" HorizontalAlignment="Left" />
+        <Button Content="Context menu" HorizontalAlignment="Left">
+          <Button.ContextMenu>
+            <ContextMenu>
+              <MenuItem Header="Cut" />
+              <MenuItem Header="Copy" />
+              <MenuItem Header="Paste" />
+            </ContextMenu>
+          </Button.ContextMenu>
+        </Button>
+        <PipsPager NumberOfPages="5" SelectedPageIndex="1" />
+        <Grid ColumnDefinitions="*,6,*" Height="60">
+          <Border Background="{DynamicResource BcBaseBrush}" BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1" />
+          <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+          <Border Grid.Column="2" Background="{DynamicResource BcBaseBrush}" BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1" />
+        </Grid>
+      </StackPanel>
+
+      <TabControl Grid.Row="1" Grid.ColumnSpan="3" Margin="4" Height="140">
+        <TabItem Header="Tab1"><TextBlock Text="Page 1" Margin="6" /></TabItem>
+        <TabItem Header="Tab2"><TextBlock Text="Page 2" Margin="6" /></TabItem>
+        <TabItem Header="Tab3"><TextBlock Text="Page 3" Margin="6" /></TabItem>
+        <TabItem Header="Tab4" IsEnabled="False"><TextBlock Text="Page 4" Margin="6" /></TabItem>
+      </TabControl>
+    </Grid>
+  </ScrollViewer>
+</UserControl>

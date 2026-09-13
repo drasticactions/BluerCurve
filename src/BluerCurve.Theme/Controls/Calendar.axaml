@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type Calendar}"
+                TargetType="Calendar">
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BcBaseBrush}" />
+    <Setter Property="HeaderBackground" Value="{DynamicResource BcBgBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BcTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Name="PART_Root"
+                    HorizontalAlignment="Center"
+                    ClipToBounds="True">
+          <CalendarItem Name="PART_CalendarItem"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        HeaderBackground="{TemplateBinding HeaderBackground}" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

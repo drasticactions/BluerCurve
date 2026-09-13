@@ -1,0 +1,251 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bc="clr-namespace:BluerCurve.Primitives"
+                    x:ClassModifier="internal">
+
+  <StreamGeometry x:Key="BcSliderGripChevronVerticalGeometry">M0,0 L1,0 L3.5,2.7 L6,0 L7,0 L3.5,4 Z</StreamGeometry>
+  <x:Double x:Key="BcSliderTroughThickness">6</x:Double>
+  <x:Double x:Key="BcSliderTickLength">7</x:Double>
+
+  <ControlTheme x:Key="SliderRepeatTrackTheme"
+                TargetType="RepeatButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcSliderHorizontalThumbTheme"
+                TargetType="Thumb">
+    <Setter Property="Width" Value="{DynamicResource BcSliderThumbLength}" />
+    <Setter Property="Height" Value="{DynamicResource BcSliderThumbThickness}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_ThumbBevel"
+                        Background="{DynamicResource BcBgBrush}"
+                        BorderBrush="{DynamicResource BcDarkerBorderBrush}"
+                        BorderThickness="1"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <Canvas>
+            <Path Canvas.Left="9" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+            <Path Canvas.Left="8" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+            <Path Canvas.Left="15" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+            <Path Canvas.Left="14" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+          </Canvas>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="BcSliderVerticalThumbTheme"
+                TargetType="Thumb">
+    <Setter Property="Width" Value="{DynamicResource BcSliderThumbThickness}" />
+    <Setter Property="Height" Value="{DynamicResource BcSliderThumbLength}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <bc:BevelBorder Name="PART_ThumbBevel"
+                        Background="{DynamicResource BcBgBrush}"
+                        BorderBrush="{DynamicResource BcDarkerBorderBrush}"
+                        BorderThickness="1"
+                        Bevel="Raised"
+                        LightBrush="{DynamicResource BcBevelLightBrush}"
+                        DarkBrush="{DynamicResource BcBevelDarkBrush}">
+          <Canvas>
+            <Path Canvas.Left="2" Canvas.Top="9" Width="7" Height="4" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+            <Path Canvas.Left="2" Canvas.Top="8" Width="7" Height="4" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+            <Path Canvas.Left="2" Canvas.Top="15" Width="7" Height="4" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+            <Path Canvas.Left="2" Canvas.Top="14" Width="7" Height="4" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+          </Canvas>
+        </bc:BevelBorder>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#PART_ThumbBevel">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type Slider}"
+                TargetType="Slider">
+    <Setter Property="Foreground" Value="{DynamicResource BcFgBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BcTroughBgBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BcBorderBrush}" />
+    <Setter Property="Padding" Value="1" />
+
+    <Style Selector="^:horizontal">
+      <Setter Property="MinWidth" Value="60" />
+      <Setter Property="MinHeight" Value="17" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Name="grid" Margin="{TemplateBinding Padding}">
+            <Grid RowDefinitions="Auto,Auto,Auto">
+              <TickBar Name="TopTickBar"
+                       Grid.Row="0"
+                       Height="{StaticResource BcSliderTickLength}"
+                       Margin="15,0,15,1"
+                       Placement="Top"
+                       Orientation="Horizontal"
+                       IsVisible="False"
+                       Fill="{DynamicResource BcBevelDarkBrush}" />
+              <bc:BevelBorder Name="TrackBackground"
+                              Grid.Row="1"
+                              Height="{StaticResource BcSliderTroughThickness}"
+                              VerticalAlignment="Center"
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="1"
+                              Bevel="Sunken"
+                              LightBrush="Transparent"
+                              DarkBrush="{DynamicResource BcTroughShadowBrush}" />
+              <Track Name="PART_Track"
+                     Grid.Row="1"
+                     MinHeight="{DynamicResource BcSliderThumbThickness}"
+                     IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                     Orientation="Horizontal">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_DecreaseButton"
+                                Theme="{StaticResource SliderRepeatTrackTheme}" />
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_IncreaseButton"
+                                Theme="{StaticResource SliderRepeatTrackTheme}" />
+                </Track.IncreaseButton>
+                <Thumb Name="thumb"
+                       Theme="{StaticResource BcSliderHorizontalThumbTheme}" />
+              </Track>
+              <TickBar Name="BottomTickBar"
+                       Grid.Row="2"
+                       Height="{StaticResource BcSliderTickLength}"
+                       Margin="15,1,15,0"
+                       Placement="Bottom"
+                       Orientation="Horizontal"
+                       IsVisible="False"
+                       Fill="{DynamicResource BcBevelDarkBrush}" />
+            </Grid>
+            <Rectangle Name="PART_FocusRect"
+                       Stroke="{DynamicResource BcOutlineBrush}"
+                       StrokeThickness="1"
+                       StrokeDashArray="1,1"
+                       IsVisible="False"
+                       IsHitTestVisible="False" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="^:vertical">
+      <Setter Property="MinWidth" Value="17" />
+      <Setter Property="MinHeight" Value="60" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Panel Name="grid" Margin="{TemplateBinding Padding}">
+            <Grid ColumnDefinitions="Auto,Auto,Auto">
+              <TickBar Name="LeftTickBar"
+                       Grid.Column="0"
+                       Width="{StaticResource BcSliderTickLength}"
+                       Margin="0,15,1,15"
+                       Placement="Left"
+                       Orientation="Vertical"
+                       IsVisible="False"
+                       Fill="{DynamicResource BcBevelDarkBrush}" />
+              <bc:BevelBorder Name="TrackBackground"
+                              Grid.Column="1"
+                              Width="{StaticResource BcSliderTroughThickness}"
+                              HorizontalAlignment="Center"
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="1"
+                              Bevel="Sunken"
+                              LightBrush="Transparent"
+                              DarkBrush="{DynamicResource BcTroughShadowBrush}" />
+              <Track Name="PART_Track"
+                     Grid.Column="1"
+                     MinWidth="{DynamicResource BcSliderThumbThickness}"
+                     IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                     Orientation="Vertical">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_DecreaseButton"
+                                Theme="{StaticResource SliderRepeatTrackTheme}" />
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_IncreaseButton"
+                                Theme="{StaticResource SliderRepeatTrackTheme}" />
+                </Track.IncreaseButton>
+                <Thumb Name="thumb"
+                       Theme="{StaticResource BcSliderVerticalThumbTheme}" />
+              </Track>
+              <TickBar Name="RightTickBar"
+                       Grid.Column="2"
+                       Width="{StaticResource BcSliderTickLength}"
+                       Margin="1,15,0,15"
+                       Placement="Right"
+                       Orientation="Vertical"
+                       IsVisible="False"
+                       Fill="{DynamicResource BcBevelDarkBrush}" />
+            </Grid>
+            <Rectangle Name="PART_FocusRect"
+                       Stroke="{DynamicResource BcOutlineBrush}"
+                       StrokeThickness="1"
+                       StrokeDashArray="1,1"
+                       IsVisible="False"
+                       IsHitTestVisible="False" />
+          </Panel>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^ /template/ Track#PART_Track">
+      <Setter Property="Minimum" Value="{TemplateBinding Minimum}" />
+      <Setter Property="Maximum" Value="{TemplateBinding Maximum}" />
+      <Setter Property="Value" Value="{TemplateBinding Value, Mode=TwoWay}" />
+    </Style>
+    <Style Selector="^ /template/ TickBar">
+      <Setter Property="Ticks" Value="{TemplateBinding Ticks}" />
+      <Setter Property="TickFrequency" Value="{TemplateBinding TickFrequency}" />
+      <Setter Property="Minimum" Value="{TemplateBinding Minimum}" />
+      <Setter Property="Maximum" Value="{TemplateBinding Maximum}" />
+      <Setter Property="IsDirectionReversed" Value="{TemplateBinding IsDirectionReversed}" />
+    </Style>
+
+    <Style Selector="^[TickPlacement=TopLeft] /template/ TickBar#TopTickBar, ^[TickPlacement=Outside] /template/ TickBar#TopTickBar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TickPlacement=BottomRight] /template/ TickBar#BottomTickBar, ^[TickPlacement=Outside] /template/ TickBar#BottomTickBar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TickPlacement=TopLeft] /template/ TickBar#LeftTickBar, ^[TickPlacement=Outside] /template/ TickBar#LeftTickBar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^[TickPlacement=BottomRight] /template/ TickBar#RightTickBar, ^[TickPlacement=Outside] /template/ TickBar#RightTickBar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <Style Selector="^:focus-visible /template/ Rectangle#PART_FocusRect">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled /template/ bc|BevelBorder#TrackBackground">
+      <Setter Property="Background" Value="{DynamicResource BcInsensitiveBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcMediumBorderBrush}" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

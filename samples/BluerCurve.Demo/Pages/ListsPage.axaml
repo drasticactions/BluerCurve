@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BluerCurve.Demo.ListsPage">
+  <Grid ColumnDefinitions="*,*,*" Margin="4">
+    <ListBox Grid.Column="0" Margin="4" SelectedIndex="1">
+      <ListBoxItem>Text 1.1</ListBoxItem>
+      <ListBoxItem>Text 2.1</ListBoxItem>
+      <ListBoxItem>Text 3.1</ListBoxItem>
+      <ListBoxItem>Text 4.1</ListBoxItem>
+      <ListBoxItem>Text 5.1</ListBoxItem>
+      <ListBoxItem>Text 6.1</ListBoxItem>
+      <ListBoxItem>Text 7.1</ListBoxItem>
+      <ListBoxItem>Text 8.1</ListBoxItem>
+      <ListBoxItem>Text 9.1</ListBoxItem>
+      <ListBoxItem>Text 10.1</ListBoxItem>
+      <ListBoxItem>Text 11.1</ListBoxItem>
+      <ListBoxItem>Text 12.1</ListBoxItem>
+      <ListBoxItem>Text 13.1</ListBoxItem>
+      <ListBoxItem>Text 14.1</ListBoxItem>
+    </ListBox>
+    <TreeView Grid.Column="1" Margin="4">
+      <TreeViewItem Header="Root 1" IsExpanded="True">
+        <TreeViewItem Header="Child 1.1" IsSelected="True" />
+        <TreeViewItem Header="Child 1.2" IsExpanded="True">
+          <TreeViewItem Header="Child 1.2.1" />
+        </TreeViewItem>
+      </TreeViewItem>
+      <TreeViewItem Header="Root 2">
+        <TreeViewItem Header="Child 2.1" />
+      </TreeViewItem>
+    </TreeView>
+    <StackPanel Grid.Column="2" Margin="4" Spacing="8">
+      <TabControl TabStripPlacement="Bottom" Height="120">
+        <TabItem Header="T1"><TextBlock Text="Bottom tabs" Margin="6" /></TabItem>
+        <TabItem Header="T2" />
+        <TabItem Header="T3" />
+      </TabControl>
+      <TabControl TabStripPlacement="Left" Height="120">
+        <TabItem Header="T1"><TextBlock Text="Left tabs" Margin="6" /></TabItem>
+        <TabItem Header="T2" />
+      </TabControl>
+      <TabStrip>
+        <TabStripItem>Strip 1</TabStripItem>
+        <TabStripItem>Strip 2</TabStripItem>
+      </TabStrip>
+      <Carousel Height="60">
+        <TextBlock Text="Carousel page 1" />
+        <TextBlock Text="Carousel page 2" />
+      </Carousel>
+    </StackPanel>
+  </Grid>
+</UserControl>

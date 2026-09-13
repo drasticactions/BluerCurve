@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BluerCurve.Demo.MiscPage">
+  <DockPanel>
+    <CommandBar DockPanel.Dock="Top" DefaultLabelPosition="Right">
+      <CommandBarButton Label="Open" Click="OnNoop">
+        <CommandBarButton.Icon>
+          <PathIcon Data="M2,3 L6,3 L7.5,4.5 L14,4.5 L14,13 L2,13 Z" />
+        </CommandBarButton.Icon>
+      </CommandBarButton>
+      <CommandBarButton Label="Save" Click="OnNoop">
+        <CommandBarButton.Icon>
+          <PathIcon Data="F0 M2,2 L12,2 L14,4 L14,14 L2,14 Z M4,2 L4,6 L11,6 L11,2 Z M4,9 L4,14 L12,14 L12,9 Z" />
+        </CommandBarButton.Icon>
+      </CommandBarButton>
+      <CommandBarSeparator />
+      <CommandBarToggleButton Label="Bold" IsChecked="True">
+        <CommandBarToggleButton.Icon>
+          <TextBlock Text="B" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </CommandBarToggleButton.Icon>
+      </CommandBarToggleButton>
+      <CommandBarToggleButton Label="Italic">
+        <CommandBarToggleButton.Icon>
+          <TextBlock Text="I" FontStyle="Italic" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </CommandBarToggleButton.Icon>
+      </CommandBarToggleButton>
+      <CommandBarSeparator />
+      <CommandBarButton Label="Disabled" IsEnabled="False">
+        <CommandBarButton.Icon>
+          <PathIcon Data="M3,3 L13,13 M13,3 L3,13" />
+        </CommandBarButton.Icon>
+      </CommandBarButton>
+    </CommandBar>
+
+    <Grid ColumnDefinitions="*,*" Margin="8" RowDefinitions="Auto,*">
+      <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,8,0">
+        <TextBlock Text="Notifications" FontWeight="Bold" />
+        <Button Content="Show notification" Name="NotifyButton" Click="OnShowNotification" HorizontalAlignment="Left" />
+        <TextBlock Text="Notification cards (as shown by WindowNotificationManager):" />
+        <StackPanel Name="Cards" Spacing="6" Width="340" HorizontalAlignment="Left">
+          <StackPanel.DataTemplates>
+            <DataTemplate DataType="INotification">
+              <StackPanel Spacing="2">
+                <TextBlock Text="{Binding Title}" FontWeight="Bold" />
+                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+              </StackPanel>
+            </DataTemplate>
+          </StackPanel.DataTemplates>
+        </StackPanel>
+      </StackPanel>
+
+      <StackPanel Grid.Column="1" Spacing="8">
+        <TextBlock Text="SplitView with an inline pane" FontWeight="Bold" />
+        <Border BorderBrush="{DynamicResource BcBorderBrush}" BorderThickness="1" Height="180">
+          <SplitView IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="140" PaneBackground="{DynamicResource BcBaseBrush}">
+            <SplitView.Pane>
+              <ListBox SelectedIndex="0" BorderThickness="0">
+                <ListBoxItem>Desktop</ListBoxItem>
+                <ListBoxItem>Documents</ListBoxItem>
+                <ListBoxItem>Downloads</ListBoxItem>
+                <ListBoxItem>Music</ListBoxItem>
+              </ListBox>
+            </SplitView.Pane>
+            <TextBlock Text="Content area" Margin="8" />
+          </SplitView>
+        </Border>
+        <TextBlock Text="Progress and refresh" FontWeight="Bold" />
+        <ProgressBar IsIndeterminate="True" />
+        <RefreshContainer Height="80">
+          <ScrollViewer>
+            <TextBlock Text="Pull down to refresh (touch)" Margin="8" />
+          </ScrollViewer>
+        </RefreshContainer>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
+</UserControl>
