@@ -19,6 +19,7 @@ public partial class BluerCurveTheme : Styles
 
     public BluerCurveTheme(IServiceProvider? sp = null)
     {
+        TextSmoothing.EnsureInitialized();
         AvaloniaXamlLoader.Load(sp, this);
         ApplyPalette();
     }
