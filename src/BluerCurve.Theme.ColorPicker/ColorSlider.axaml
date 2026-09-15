@@ -28,9 +28,9 @@
             <Canvas Width="10" Height="8"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-              <Path Canvas.Left="1" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="1" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBevelLightBrush}" />
               <Path Canvas.Left="0" Canvas.Top="0" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBorderBrush}" />
-              <Path Canvas.Left="6" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="6" Canvas.Top="1" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBevelLightBrush}" />
               <Path Canvas.Left="5" Canvas.Top="0" Width="4" Height="7" Data="{StaticResource BcGripChevronGeometry}" Fill="{DynamicResource BcBorderBrush}" />
             </Canvas>
           </bc:BevelBorder>
@@ -54,9 +54,9 @@
             <Canvas Width="8" Height="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-              <Path Canvas.Left="1" Canvas.Top="1" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="1" Canvas.Top="1" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBevelLightBrush}" />
               <Path Canvas.Left="0" Canvas.Top="0" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBorderBrush}" />
-              <Path Canvas.Left="1" Canvas.Top="6" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcWhiteBrush}" />
+              <Path Canvas.Left="1" Canvas.Top="6" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBevelLightBrush}" />
               <Path Canvas.Left="0" Canvas.Top="5" Width="7" Height="4" Data="{StaticResource ColorSliderGripChevronDownGeometry}" Fill="{DynamicResource BcBorderBrush}" />
             </Canvas>
           </bc:BevelBorder>

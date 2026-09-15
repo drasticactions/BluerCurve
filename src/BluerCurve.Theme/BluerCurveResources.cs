@@ -2,12 +2,31 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
+using Avalonia.Styling;
 using static BluerCurve.ColorMath;
 
 namespace BluerCurve;
 
 public static class BluerCurveResources
 {
+    public static void Apply(BluerCurvePalette light, BluerCurvePalette dark, IResourceDictionary target)
+    {
+        if (target is not ResourceDictionary dictionary)
+            throw new ArgumentException("Theme variants require a ResourceDictionary.", nameof(target));
+
+        Apply(light, ThemeDictionary(dictionary, ThemeVariant.Default));
+        Apply(dark, ThemeDictionary(dictionary, ThemeVariant.Dark));
+    }
+
+    private static ResourceDictionary ThemeDictionary(ResourceDictionary owner, ThemeVariant variant)
+    {
+        if (owner.ThemeDictionaries.TryGetValue(variant, out var existing) && existing is ResourceDictionary rd)
+            return rd;
+        var created = new ResourceDictionary();
+        owner.ThemeDictionaries[variant] = created;
+        return created;
+    }
+
     public static void Apply(BluerCurvePalette p, IResourceDictionary target)
     {
         var bg = p.Bg;
@@ -56,15 +75,18 @@ public static class BluerCurveResources
         Set("MediumBorder", Shade(bg, 0.7));
         Set("Border", Shade(bg, 0.665));
         Set("DarkerBorder", Shade(bg, 0.4));
-        Set("Outline", Shade(bg, 0.205));
-        Set("ButtonIcon", Shade(bg, 0.205));
+        Set("SecondaryText", p.SecondaryText ?? Shade(bg, 0.4));
+        Set("Outline", p.Outline ?? Shade(bg, 0.205));
+        Set("ButtonIcon", p.ButtonIcon ?? Shade(bg, 0.205));
         Set("Darker", p.BgActive);
         Set("White", white);
         Set("Black", black);
-        Set("BevelLight", white);
+        Set("BevelLight", p.BevelLight);
         Set("BevelDark", Shade(bg, 0.896));
-        Set("EntryDisabledText", Color.Parse("#757575"));
-        Set("DisabledTextShadow", p.SelectedFg);
+        Set("EntryDisabledText", p.EntryDisabledText);
+        Set("DisabledTextShadow", p.DisabledTextShadow);
+        Set("DefaultButtonBorder", p.DefaultButtonBorder);
+        Set("ButtonIconHover", p.ButtonIconHover);
         Set("Light", light);
         Set("Dark", dark);
         Set("LightSelected", lightSel);
@@ -116,7 +138,7 @@ public static class BluerCurveResources
         Set("FrameActiveSeparator", Blend(dark, sel, 0.5));
         Set("FrameInactiveTint", Blend(bg, dark, 0.2));
         Set("FrameInactiveSeparator", Blend(dark, bg, 0.5));
-        Set("FrameOutline", black);
+        Set("FrameOutline", p.FrameOutline);
         Brush("FrameActiveGradient", Vertical((0, Blend(sel, bg, 0.75)), (0.8, Blend(sel, bg, 0.75)), (1, Blend(lightSel, light, 0.75))));
         Brush("CaptionButtonGradient", Diagonal(Blend(light, lightSel, 0.2), Blend(light, lightSel, 0.1)));
         Set("CaptionButtonFill", Blend(light, lightSel, 0.15));
@@ -126,8 +148,9 @@ public static class BluerCurveResources
         Set("CaptionButtonBorderHover", Blend(dark, sel, 0.7));
         Set("CaptionButtonPrelightTint", WithAlpha(light, 0.5));
         Set("CaptionButtonPressedTint", WithAlpha(Blend(darkSel, dark, 0.75), 0.25));
-        Set("CaptionGlyph", WithAlpha(darkSel, 0.75));
-        Set("CaptionGlyphHover", darkSel);
+        var captionGlyph = p.CaptionGlyph ?? darkSel;
+        Set("CaptionGlyph", WithAlpha(captionGlyph, 0.75));
+        Set("CaptionGlyphHover", captionGlyph);
         Set("CaptionGlyphInactive", WithAlpha(p.InsensitiveFg, 0.75));
         Brush("CaptionButtonInactiveGradient", Vertical((0, Blend(light, bg, 0.7)), (1, Blend(light, bg, 0.9))));
         Set("CaptionButtonInactiveBorder", Blend(dark, bg, 0.4));

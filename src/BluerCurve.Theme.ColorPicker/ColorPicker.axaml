@@ -70,7 +70,7 @@
       <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
     </Style>
     <Style Selector="^:pointerover /template/ Path#DropDownGlyph">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />

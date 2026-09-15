@@ -85,10 +85,10 @@
       </Style>
     </Style>
     <Style Selector="^ /template/ RepeatButton#PART_IncreaseButton:pointerover Path">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^ /template/ RepeatButton#PART_DecreaseButton:pointerover Path">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:disabled /template/ UniformGrid#PART_SpinnerPanel Path">
       <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />

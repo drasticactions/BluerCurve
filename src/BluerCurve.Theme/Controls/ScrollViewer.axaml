@@ -98,7 +98,7 @@
       <Setter Property="Fill" Value="{DynamicResource BcButtonIconBrush}" />
     </Style>
     <Style Selector="^ /template/ RepeatButton:pointerover Path.arrow">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
   </ControlTheme>
 </ResourceDictionary>

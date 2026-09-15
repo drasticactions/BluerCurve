@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Styling;
 using BluerCurve.Chrome;
 
 namespace BluerCurve.Demo;
@@ -21,16 +22,39 @@ public sealed class VariantItem
     public ICommand Select { get; }
 }
 
+public sealed class ThemeModeItem
+{
+    public ThemeModeItem(string name, ThemeVariant variant, Action<ThemeModeItem> select)
+    {
+        Name = name;
+        Variant = variant;
+        Select = new RelayCommand(() => select(this));
+    }
+
+    public string Name { get; }
+    public ThemeVariant Variant { get; }
+    public ICommand Select { get; }
+}
+
 public sealed class MainWindowViewModel : INotifyPropertyChanged
 {
     private readonly Window _owner;
     private VariantItem _selectedVariant;
+    private ThemeModeItem _selectedThemeMode;
 
     public MainWindowViewModel(Window owner)
     {
         _owner = owner;
         Variants = Enum.GetValues<BluerCurveVariant>().Select(v => new VariantItem(v, ApplyVariant)).ToList();
         _selectedVariant = Variants.First(v => v.Variant == Theme.Variant);
+        ThemeModes =
+        [
+            new ThemeModeItem("System", ThemeVariant.Default, m => SelectedThemeMode = m),
+            new ThemeModeItem("Light", ThemeVariant.Light, m => SelectedThemeMode = m),
+            new ThemeModeItem("Dark", ThemeVariant.Dark, m => SelectedThemeMode = m),
+        ];
+        var requested = Application.Current!.RequestedThemeVariant ?? ThemeVariant.Default;
+        _selectedThemeMode = ThemeModes.FirstOrDefault(m => m.Variant == requested) ?? ThemeModes[0];
         OpenPlainWindow = new RelayCommand(() => new Window
         {
             Title = "Plain Window",
@@ -58,6 +82,20 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             if (value is null || ReferenceEquals(_selectedVariant, value)) return;
             _selectedVariant = value;
             Theme.Variant = value.Variant;
+            OnPropertyChanged();
+        }
+    }
+
+    public IReadOnlyList<ThemeModeItem> ThemeModes { get; }
+
+    public ThemeModeItem SelectedThemeMode
+    {
+        get => _selectedThemeMode;
+        set
+        {
+            if (value is null || ReferenceEquals(_selectedThemeMode, value)) return;
+            _selectedThemeMode = value;
+            Application.Current!.RequestedThemeVariant = value.Variant;
             OnPropertyChanged();
         }
     }

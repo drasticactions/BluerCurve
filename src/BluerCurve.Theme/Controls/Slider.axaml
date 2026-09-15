@@ -32,9 +32,9 @@
                         LightBrush="{DynamicResource BcBevelLightBrush}"
                         DarkBrush="{DynamicResource BcBevelDarkBrush}">
           <Canvas>
-            <Path Canvas.Left="9" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+            <Path Canvas.Left="9" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBevelLightBrush}" Data="{StaticResource BcGripChevronGeometry}" />
             <Path Canvas.Left="8" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcGripChevronGeometry}" />
-            <Path Canvas.Left="15" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcGripChevronGeometry}" />
+            <Path Canvas.Left="15" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBevelLightBrush}" Data="{StaticResource BcGripChevronGeometry}" />
             <Path Canvas.Left="14" Canvas.Top="2" Width="4" Height="7" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcGripChevronGeometry}" />
           </Canvas>
         </bc:BevelBorder>
@@ -66,9 +66,9 @@
                         LightBrush="{DynamicResource BcBevelLightBrush}"
                         DarkBrush="{DynamicResource BcBevelDarkBrush}">
           <Canvas>
-            <Path Canvas.Left="2" Canvas.Top="9" Width="7" Height="4" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+            <Path Canvas.Left="2" Canvas.Top="9" Width="7" Height="4" Fill="{DynamicResource BcBevelLightBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
             <Path Canvas.Left="2" Canvas.Top="8" Width="7" Height="4" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
-            <Path Canvas.Left="2" Canvas.Top="15" Width="7" Height="4" Fill="{DynamicResource BcWhiteBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
+            <Path Canvas.Left="2" Canvas.Top="15" Width="7" Height="4" Fill="{DynamicResource BcBevelLightBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
             <Path Canvas.Left="2" Canvas.Top="14" Width="7" Height="4" Fill="{DynamicResource BcBorderBrush}" Data="{StaticResource BcSliderGripChevronVerticalGeometry}" />
           </Canvas>
         </bc:BevelBorder>

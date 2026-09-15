@@ -19,7 +19,7 @@
     <Setter Property="Foreground" Value="{DynamicResource BcButtonIconBrush}" />
     <Setter Property="MinWidth" Value="20" />
     <Style Selector="^:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />
@@ -124,7 +124,7 @@
                    VerticalAlignment="Center"
                    FontSize="{DynamicResource FontSizeSmall}"
                    FontWeight="Bold"
-                   Foreground="{DynamicResource BcDarkerBorderBrush}"
+                   Foreground="{DynamicResource BcSecondaryTextBrush}"
                    Text="{Binding}" />
       </Template>
     </Setter>

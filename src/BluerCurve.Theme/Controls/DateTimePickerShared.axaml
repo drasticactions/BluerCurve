@@ -90,7 +90,7 @@
       <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
     </Style>
     <Style Selector="^:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />

@@ -4,7 +4,7 @@
   <ControlTheme x:Key="{x:Type Separator}"
                 TargetType="Separator">
     <Setter Property="Focusable" Value="False" />
-    <Setter Property="Background" Value="{DynamicResource BcWhiteBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BcBevelLightBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource BcSeparatorDarkerBrush}" />
     <Setter Property="BorderThickness" Value="0,1,0,0" />
     <Setter Property="Margin" Value="0,1" />

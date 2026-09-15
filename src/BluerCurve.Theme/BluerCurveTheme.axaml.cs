@@ -17,6 +17,9 @@ public partial class BluerCurveTheme : Styles
     public static readonly StyledProperty<BluerCurvePalette?> PaletteProperty =
         AvaloniaProperty.Register<BluerCurveTheme, BluerCurvePalette?>(nameof(Palette));
 
+    public static readonly StyledProperty<BluerCurvePalette?> DarkPaletteProperty =
+        AvaloniaProperty.Register<BluerCurveTheme, BluerCurvePalette?>(nameof(DarkPalette));
+
     public BluerCurveTheme(IServiceProvider? sp = null)
     {
         TextSmoothing.EnsureInitialized();
@@ -36,16 +39,24 @@ public partial class BluerCurveTheme : Styles
         set => SetValue(PaletteProperty, value);
     }
 
+    public BluerCurvePalette? DarkPalette
+    {
+        get => GetValue(DarkPaletteProperty);
+        set => SetValue(DarkPaletteProperty, value);
+    }
+
     public BluerCurvePalette EffectivePalette => Palette ?? BluerCurvePalette.FromVariant(Variant);
+
+    public BluerCurvePalette EffectiveDarkPalette => DarkPalette ?? BluerCurvePalette.FromVariantDark(Variant);
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == VariantProperty || change.Property == PaletteProperty)
+        if (change.Property == VariantProperty || change.Property == PaletteProperty || change.Property == DarkPaletteProperty)
         {
             ApplyPalette();
         }
     }
 
-    private void ApplyPalette() => BluerCurveResources.Apply(EffectivePalette, Resources);
+    private void ApplyPalette() => BluerCurveResources.Apply(EffectivePalette, EffectiveDarkPalette, Resources);
 }

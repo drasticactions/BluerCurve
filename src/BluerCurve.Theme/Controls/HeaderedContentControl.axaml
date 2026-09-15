@@ -19,7 +19,7 @@
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                               Padding="5,0"
-                              TextElement.Foreground="{DynamicResource BcDarkerBorderBrush}"
+                              TextElement.Foreground="{DynamicResource BcSecondaryTextBrush}"
                               FontSize="{TemplateBinding FontSize}"
                               FontWeight="{TemplateBinding FontWeight}"
                               FontStyle="{TemplateBinding FontStyle}"

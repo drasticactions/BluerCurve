@@ -166,7 +166,7 @@
       <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^ /template/ Button#PART_SecondaryButton:pointerover Path#DropDownGlyph">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />

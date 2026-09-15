@@ -83,7 +83,7 @@
       <Setter Property="Fill" Value="{DynamicResource BcBorderBrush}" />
     </Style>
     <Style Selector="^ /template/ Path.gripShadow">
-      <Setter Property="Fill" Value="{DynamicResource BcWhiteBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcBevelLightBrush}" />
     </Style>
     <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
@@ -294,10 +294,10 @@
       </Setter>
     </Style>
     <Style Selector="^ /template/ RepeatButton:pointerover Path.arrow">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^ /template/ RepeatButton:pressed Path.arrow">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^ /template/ RepeatButton:disabled Path.arrow">
       <Setter Property="Fill" Value="{DynamicResource BcInsensitiveFgBrush}" />

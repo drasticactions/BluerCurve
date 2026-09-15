@@ -36,7 +36,7 @@
                          Height="11"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center"
-                         Fill="{DynamicResource BcWhiteBrush}" />
+                         Fill="{DynamicResource BcBaseBrush}" />
                 <Ellipse Name="checkMark"
                          Width="7"
                          Height="7"

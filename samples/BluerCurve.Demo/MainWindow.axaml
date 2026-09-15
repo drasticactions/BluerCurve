@@ -17,6 +17,14 @@
             </ControlTheme>
           </MenuItem.ItemContainerTheme>
         </MenuItem>
+        <MenuItem Header="Theme" ItemsSource="{Binding ThemeModes}">
+          <MenuItem.ItemContainerTheme>
+            <ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="demo:ThemeModeItem">
+              <Setter Property="Header" Value="{Binding Name}" />
+              <Setter Property="Command" Value="{Binding Select}" />
+            </ControlTheme>
+          </MenuItem.ItemContainerTheme>
+        </MenuItem>
         <Separator />
         <MenuItem Header="Open a plain Window (native or drawn decorations)" Command="{Binding OpenPlainWindow}" />
         <MenuItem Header="Open a BluerCurveWindow" Command="{Binding OpenBluerCurveWindow}" />
@@ -51,6 +59,14 @@
       <ComboBox ItemsSource="{Binding Variants}" SelectedItem="{Binding SelectedVariant}" MinWidth="150">
         <ComboBox.ItemTemplate>
           <DataTemplate x:DataType="demo:VariantItem">
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="12,0,0,0" />
+      <ComboBox ItemsSource="{Binding ThemeModes}" SelectedItem="{Binding SelectedThemeMode}" MinWidth="100">
+        <ComboBox.ItemTemplate>
+          <DataTemplate x:DataType="demo:ThemeModeItem">
             <TextBlock Text="{Binding Name}" />
           </DataTemplate>
         </ComboBox.ItemTemplate>

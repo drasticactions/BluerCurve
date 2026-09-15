@@ -22,7 +22,7 @@
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Style Selector="^:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />

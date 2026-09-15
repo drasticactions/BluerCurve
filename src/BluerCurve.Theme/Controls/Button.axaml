@@ -53,7 +53,7 @@
       <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^[IsDefault=True]">
-      <Setter Property="BorderBrush" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BcDefaultButtonBorderBrush}" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource BcInsensitiveFgBrush}" />

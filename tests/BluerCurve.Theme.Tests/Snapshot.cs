@@ -1,6 +1,7 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Controls;
 using Avalonia.Headless;
+using Avalonia.Styling;
 using Avalonia.Threading;
 
 namespace BluerCurve.Tests;
@@ -14,6 +15,15 @@ internal static class Snapshot
     public static string Capture(Window window, string name)
     {
         window.Show();
+        var path = Render(window, name);
+        window.RequestedThemeVariant = ThemeVariant.Dark;
+        Render(window, name + "-dark");
+        window.Close();
+        return path;
+    }
+
+    private static string Render(Window window, string name)
+    {
         Dispatcher.UIThread.RunJobs();
         AvaloniaHeadlessPlatform.ForceRenderTimerTick();
         Dispatcher.UIThread.RunJobs();
@@ -21,7 +31,6 @@ internal static class Snapshot
         System.IO.Directory.CreateDirectory(Directory);
         var path = Path.Combine(Directory, name + ".png");
         frame.Save(path, PngBitmapEncoderOptions.Default);
-        window.Close();
         return path;
     }
 }

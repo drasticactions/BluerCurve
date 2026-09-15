@@ -67,7 +67,7 @@
       <Setter Property="DarkBrush" Value="{DynamicResource BcBevelDarkBrush}" />
     </Style>
     <Style Selector="^:pointerover /template/ Path#PART_Arrow">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />
@@ -333,7 +333,7 @@
         <ControlTemplate>
           <StackPanel>
             <Border Height="1" Background="{DynamicResource BcSeparatorDarkerBrush}" />
-            <Border Height="1" Background="{DynamicResource BcWhiteBrush}" />
+            <Border Height="1" Background="{DynamicResource BcBevelLightBrush}" />
           </StackPanel>
         </ControlTemplate>
       </Setter>

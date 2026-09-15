@@ -39,7 +39,7 @@
       </Setter.Value>
     </Setter>
     <Style Selector="^:pointerover /template/ Path#PART_GlyphElement">
-      <Setter Property="Fill" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Fill" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
   </ControlTheme>
 

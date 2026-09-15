@@ -29,7 +29,7 @@
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top">
                 <Border Name="box"
-                        Background="{DynamicResource BcWhiteBrush}"
+                        Background="{DynamicResource BcBaseBrush}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}" />
                 <Path Name="checkMark"

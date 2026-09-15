@@ -53,7 +53,7 @@
       </ControlTemplate>
     </Setter>
     <Style Selector="^:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:pointerover /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
@@ -184,7 +184,7 @@
       <Setter Property="Background" Value="{DynamicResource BcPrelightBrush}" />
     </Style>
     <Style Selector="^:pointerover /template/ ToggleButton#toggle">
-      <Setter Property="Foreground" Value="{DynamicResource BcBlackBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource BcButtonIconHoverBrush}" />
     </Style>
     <Style Selector="^:pressed /template/ bc|BevelBorder#PART_Bevel, ^[IsDropDownOpen=True] /template/ bc|BevelBorder#PART_Bevel">
       <Setter Property="Background" Value="{DynamicResource BcDarkerBrush}" />

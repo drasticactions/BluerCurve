@@ -53,7 +53,7 @@
                               ContentTemplate="{TemplateBinding HeaderTemplate}"
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                              TextElement.Foreground="{DynamicResource BcDarkerBorderBrush}"
+                              TextElement.Foreground="{DynamicResource BcSecondaryTextBrush}"
                               RecognizesAccessKey="True"
                               UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
           </Border>
