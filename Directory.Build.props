@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <AvaloniaVersion>12.1.2</AvaloniaVersion>
-    <BluerCurveVersion>0.1.0-alpha3</BluerCurveVersion>
+    <BluerCurveVersion>0.1.0-alpha4</BluerCurveVersion>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
