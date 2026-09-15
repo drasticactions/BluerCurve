@@ -129,6 +129,9 @@
     <Style Selector="^:not(:has-border) /template/ Border#PART_ClientOutline">
       <Setter Property="IsVisible" Value="False" />
     </Style>
+    <Style Selector="^:not(:has-border):not(:has-titlebar) /template/ Border#PART_WindowBorder">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
     <Style Selector="^:not(:has-border) /template/ Panel#PART_TitleBar">
       <Setter Property="Margin" Value="0" />
     </Style>
