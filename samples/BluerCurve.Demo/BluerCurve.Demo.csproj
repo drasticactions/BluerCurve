@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Wayland" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaVersion)" />
     <ProjectReference Include="../../src/BluerCurve.Theme/BluerCurve.Theme.csproj" />
     <ProjectReference Include="../../src/BluerCurve.Theme.ColorPicker/BluerCurve.Theme.ColorPicker.csproj" />

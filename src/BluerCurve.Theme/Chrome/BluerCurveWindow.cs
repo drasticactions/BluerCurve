@@ -69,11 +69,22 @@ public class BluerCurveWindow : Window
         if (_titleBar is not null)
         {
             _titleBar.PointerPressed += OnTitleBarPointerPressed;
+            if (WindowDecorations == WindowDecorations.None)
+                TakeOverTitleBarRole(_titleBar);
         }
         foreach (var border in this.GetVisualDescendants().OfType<Border>().Where(b => b.Classes.Contains(ResizeBorderClass)))
         {
             border.PointerPressed -= OnResizeBorderPointerPressed;
             border.PointerPressed += OnResizeBorderPointerPressed;
+        }
+    }
+
+    private static void TakeOverTitleBarRole(Control titleBar)
+    {
+        foreach (var visual in titleBar.GetSelfAndVisualDescendants())
+        {
+            if (WindowDecorationProperties.GetElementRole(visual) == WindowDecorationsElementRole.TitleBar)
+                WindowDecorationProperties.SetElementRole(visual, WindowDecorationsElementRole.User);
         }
     }
 
