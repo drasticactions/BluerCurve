@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/BluerCurve.Icons/BluerCurve.Icons.csproj" />
     <Project Path="src/BluerCurve.Theme/BluerCurve.Theme.csproj" />
     <Project Path="src/BluerCurve.Theme.ColorPicker/BluerCurve.Theme.ColorPicker.csproj" />
   </Folder>

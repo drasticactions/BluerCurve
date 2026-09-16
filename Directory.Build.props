@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
     <AvaloniaVersion>12.1.2</AvaloniaVersion>
+    <SvgSkiaVersion>12.0.0.17</SvgSkiaVersion>
     <BluerCurveVersion>0.1.0-alpha6</BluerCurveVersion>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>

@@ -20,4 +20,11 @@ public class DemoPagesSnapshotTests
         var window = new Window { Width = 760, Height = 480, Content = new ListsPage() };
         Assert.True(File.Exists(Snapshot.Capture(window, "demo-lists")));
     }
+
+    [AvaloniaFact]
+    public void Render_Icons_Page()
+    {
+        var window = new Window { Width = 900, Height = 600, Content = new IconsPage() };
+        Assert.True(File.Exists(Snapshot.Capture(window, "demo-icons")));
+    }
 }

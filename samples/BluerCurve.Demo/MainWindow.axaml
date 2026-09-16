@@ -86,6 +86,9 @@
       <TabItem Header="Misc">
         <demo:MiscPage />
       </TabItem>
+      <TabItem Header="Icons">
+        <demo:IconsPage />
+      </TabItem>
     </TabControl>
   </DockPanel>
 </chrome:BluerCurveWindow>

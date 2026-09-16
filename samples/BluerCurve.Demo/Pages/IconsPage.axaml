@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:demo="clr-namespace:BluerCurve.Demo"
+             xmlns:icons="clr-namespace:BluerCurve.Icons;assembly=BluerCurve.Icons"
+             x:Class="BluerCurve.Demo.IconsPage"
+             x:DataType="demo:IconsPageViewModel">
+  <DockPanel Margin="4">
+    <StackPanel DockPanel.Dock="Top" Spacing="6" Margin="4">
+      <TextBlock Text="Icons referenced directly by avares:// path" FontWeight="Bold" />
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button VerticalAlignment="Center">
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <Svg Path="avares://BluerCurve.Icons/16x16/actions/stock-open.svg" Width="16" Height="16" />
+            <TextBlock Text="Open" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+        <Button VerticalAlignment="Center">
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <Svg Path="avares://BluerCurve.Icons/16x16/actions/stock-save.svg" Width="16" Height="16" />
+            <TextBlock Text="Save" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+        <Menu VerticalAlignment="Center">
+          <MenuItem Header="_Edit">
+            <MenuItem Header="Cu_t">
+              <MenuItem.Icon>
+                <Svg Path="avares://BluerCurve.Icons/16x16/actions/stock-cut.svg" />
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Copy">
+              <MenuItem.Icon>
+                <Svg Path="avares://BluerCurve.Icons/16x16/actions/stock-copy.svg" />
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Paste">
+              <MenuItem.Icon>
+                <Svg Path="avares://BluerCurve.Icons/16x16/actions/stock-paste.svg" />
+              </MenuItem.Icon>
+            </MenuItem>
+          </MenuItem>
+        </Menu>
+        <Svg Path="avares://BluerCurve.Icons/24x24/places/folder-documents.svg" Width="24" Height="24" VerticalAlignment="Center" />
+        <Svg Path="avares://BluerCurve.Icons/32x32/apps/icon-computer.svg" Width="32" Height="32" VerticalAlignment="Center" />
+        <Svg Path="avares://BluerCurve.Icons/48x48/apps/icon-computer.svg" Width="48" Height="48" VerticalAlignment="Center" />
+        <Image Source="{SvgImage avares://BluerCurve.Icons/96x96/apps/icon-computer.svg}" Width="96" Height="96" />
+      </StackPanel>
+
+      <TextBlock Text="Browse" FontWeight="Bold" Margin="0,8,0,0" />
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock Text="Size:" VerticalAlignment="Center" />
+        <ComboBox ItemsSource="{Binding Sizes}" SelectedItem="{Binding SelectedSize}" MinWidth="70" />
+        <TextBlock Text="Context:" VerticalAlignment="Center" Margin="8,0,0,0" />
+        <ComboBox ItemsSource="{Binding Contexts}" SelectedItem="{Binding SelectedContext}" MinWidth="110" />
+        <TextBlock Text="Filter:" VerticalAlignment="Center" Margin="8,0,0,0" />
+        <TextBox Text="{Binding Filter}" PlaceholderText="name contains…" MinWidth="140" />
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock Text="Find by standard name (alias aware):" VerticalAlignment="Center" />
+        <TextBox Text="{Binding LookupName}" PlaceholderText="e.g. edit-copy, folder, system-run" MinWidth="200" />
+        <Svg Path="{Binding LookupResult.Path}" Width="24" Height="24" IsVisible="{Binding LookupResult, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        <TextBlock Text="{Binding LookupSummary}" VerticalAlignment="Center" Foreground="{DynamicResource BcInsensitiveFgBrush}" />
+      </StackPanel>
+      <TextBlock Text="{Binding Summary}" />
+    </StackPanel>
+
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Icons}" Margin="4">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="icons:BluecurveIcon">
+            <StackPanel Width="104" Margin="2" Spacing="2" ToolTip.Tip="{Binding Path}">
+              <Svg Path="{Binding Path}" Width="{Binding Size}" Height="{Binding Size}" HorizontalAlignment="Center" />
+              <TextBlock Text="{Binding Name}" FontSize="11" TextAlignment="Center" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

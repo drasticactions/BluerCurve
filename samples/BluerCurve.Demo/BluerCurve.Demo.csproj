@@ -12,9 +12,9 @@
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Wayland" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="$(SvgSkiaVersion)" />
+    <ProjectReference Include="../../src/BluerCurve.Icons/BluerCurve.Icons.csproj" />
     <ProjectReference Include="../../src/BluerCurve.Theme/BluerCurve.Theme.csproj" />
     <ProjectReference Include="../../src/BluerCurve.Theme.ColorPicker/BluerCurve.Theme.ColorPicker.csproj" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
 </Project>

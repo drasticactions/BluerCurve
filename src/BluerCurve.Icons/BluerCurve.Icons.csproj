@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>BluerCurve.Icons</RootNamespace>
+    <PackageId>BluerCurve.Icons</PackageId>
+    <Description>Bluecurve SVG icon pack for BluerCurve.</Description>
+    <IsPackable>true</IsPackable>
+    <BluecurveIconRoot>$(RepoRoot)external/Bluecurve/icons/</BluecurveIconRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="$(BluecurveIconRoot)icon-set/Bluecurve/**/*.svg"
+                      Exclude="$(BluecurveIconRoot)icon-set/Bluecurve/**/*@2x/**"
+                      Link="%(RecursiveDir)%(Filename)%(Extension)" />
+    <AvaloniaResource Include="$(BluecurveIconRoot)icon-xml/*.icontheme" Link="icon-xml/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>
