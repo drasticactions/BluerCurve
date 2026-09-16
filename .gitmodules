@@ -1,0 +1,3 @@
+[submodule "external/Bluecurve"]
+	path = external/Bluecurve
+	url = https://github.com/neeeeow/Bluecurve.git
