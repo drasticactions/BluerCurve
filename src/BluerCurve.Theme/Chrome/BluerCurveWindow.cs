@@ -25,7 +25,11 @@ public class BluerCurveWindow : Window
         },
     };
 
+    private const uint DoubleClickMs = 400;
+
     private Control? _titleBar;
+    private ulong _lastTitlePressMs;
+    private bool _titleArmed;
 
     protected override Type StyleKeyOverride => typeof(BluerCurveWindow);
 
@@ -76,17 +80,30 @@ public class BluerCurveWindow : Window
     private void OnTitleBarPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed || e.Source is Button or MenuItem)
-            return;
-        if (e.Source is Visual v && v.FindAncestorOfType<Button>(true) is not null)
-            return;
-
-        if (e.ClickCount == 2)
         {
+            _titleArmed = false;
+            return;
+        }
+        if (e.Source is Visual v && v.FindAncestorOfType<Button>(true) is not null)
+        {
+            _titleArmed = false;
+            return;
+        }
+
+        var timeMs = e.Timestamp;
+        var doubleClick = e.ClickCount == 2
+            || (_titleArmed && timeMs != 0 && timeMs - _lastTitlePressMs <= DoubleClickMs);
+        if (doubleClick)
+        {
+            _titleArmed = false;
             if (CanResize && CanMaximize)
                 WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
             e.Handled = true;
             return;
         }
+
+        _titleArmed = true;
+        _lastTitlePressMs = timeMs;
 
         if (WindowDecorations == WindowDecorations.None)
         {
@@ -97,6 +114,7 @@ public class BluerCurveWindow : Window
 
     private void OnResizeBorderPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        _titleArmed = false;
         if (sender is not Border border || !CanResize || WindowState != WindowState.Normal)
             return;
         if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed || WindowDecorations != WindowDecorations.None)
